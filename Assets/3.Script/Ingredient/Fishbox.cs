@@ -18,6 +18,15 @@ public class Fishbox : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && playerInput.isInteraction_space)
+        {
+            fish = Instantiate(fish_prefed, playerPos.position, playerPos.rotation);
+            fish.transform.SetParent(other.gameObject.transform);
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && playerInput.isInteraction_space)
