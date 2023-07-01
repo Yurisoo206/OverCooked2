@@ -53,7 +53,8 @@ public class Sushi : MonoBehaviour
             if (workTop_contact2 != null && workTop_contact == null)
             {
                 gameObject.transform.SetParent(null);
-                transform.position = workTop_contact2.GetComponent<Transform>().position;
+                //transform.position = workTop_contact2.GetComponent<Transform>().position;
+                //transform.position = other.transform.GetComponentsInParent<Transform>()[2].gameObject;
                 Debug.Log(workTop_contact2);
             }
         }

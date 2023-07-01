@@ -5,16 +5,19 @@ using UnityEngine;
 public class Fishbox : MonoBehaviour
 {
     PlayerInputManager playerInput;
+    PlayerControll playerControll;
 
     public Transform playerPos;
     public GameObject fish_prefed;
-    public GameObject setParent_player;
 
     public GameObject fish;
+    private Animator ani;
 
     private void Start()
     {
         playerInput = FindObjectOfType<PlayerInputManager>();
+        playerControll = FindObjectOfType<PlayerControll>();
+        ani = GetComponent<Animator>();
     }
 
 
@@ -22,6 +25,10 @@ public class Fishbox : MonoBehaviour
     {
         if (other.CompareTag("Player") && playerInput.isInteraction_space)
         {
+            playerControll.ishand = true;
+            ani.SetTrigger("Open");
+            playerPos = other.GetComponentsInChildren<Transform>()[1].transform;
+            Debug.Log(playerPos);
             fish = Instantiate(fish_prefed, playerPos.position, playerPos.rotation);
             fish.transform.SetParent(other.gameObject.transform);
         }
@@ -31,6 +38,10 @@ public class Fishbox : MonoBehaviour
     {
         if (other.CompareTag("Player") && playerInput.isInteraction_space)
         {
+            playerControll.ishand = true;
+            ani.SetTrigger("Open");
+            playerPos = other.GetComponentsInChildren<Transform>()[1].transform;
+            Debug.Log(playerPos);
             fish = Instantiate(fish_prefed, playerPos.position, playerPos.rotation);
             fish.transform.SetParent(other.gameObject.transform);
         }

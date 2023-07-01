@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 8641772019824956144}
   - component: {fileID: 8981986839827302516}
   - component: {fileID: 8981986839827302475}
+  - component: {fileID: 3807844561950313825}
   m_Layer: 0
   m_Name: recipe_sushi_01
   m_TagString: Cook
@@ -329,8 +330,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3, y: 1, z: 1.3}
-  m_Center: {x: -0.00944519, y: 0, z: 0.14149809}
+  m_Size: {x: 1.3, y: 1, z: 0.1132921}
+  m_Center: {x: -0.00944519, y: 0, z: -0.45185584}
 --- !u!114 &8981986839827302475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,3 +347,16 @@ MonoBehaviour:
   playerControll: {fileID: 0}
   worktop: {fileID: 0}
   isplate: 0
+--- !u!65 &3807844561950313825
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8981986839827302474}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.042377472, y: 1, z: 1}
+  m_Center: {x: -0.056838036, y: 0, z: 0}

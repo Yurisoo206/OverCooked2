@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258301337983716127}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.00059, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7896758658916795660}
@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 1380396806740395334}
   - component: {fileID: 4095155406128053499}
   - component: {fileID: 3291895946791278135}
-  - component: {fileID: 940828515851713689}
   m_Layer: 0
   m_Name: Fish_01 (2)
   m_TagString: Untagged
@@ -77,8 +76,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0016576749, y: 0.008592135, z: 0.014431651}
-  m_Center: {x: 0.00053302676, y: -0.0032156839, z: 0.00023738742}
+  m_Size: {x: 0.015382078, y: 0.011, z: 0.011}
+  m_Center: {x: -0.0003894153, y: -0.0032156843, z: 0.000697425}
 --- !u!114 &3291895946791278135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,23 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2690890ad3d5e4891899856bbf0d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerComtroll: {fileID: 0}
+  playerControll: {fileID: 0}
   timer: {fileID: 3781850498893292870}
   isplate: 0
   isCooking: 0
---- !u!65 &940828515851713689
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757520106346782716}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.022004757, y: 0.008408219, z: 0.0016739892}
-  m_Center: {x: 0.0014137935, y: -0.0032541114, z: -0.0063894144}
 --- !u!1 &3781850497417683629
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5ac9df05b152947b90a3093d748c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerComtroll: {fileID: 0}
+  playerControll: {fileID: 0}
   sliderTime: {fileID: 0}
   LimitTime: 5
 --- !u!1 &3781850498245305216
@@ -358,7 +344,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -493,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3781850498893292871
 RectTransform:
   m_ObjectHideFlags: 0
@@ -608,8 +594,8 @@ RectTransform:
   m_Father: {fileID: 3781850499158861127}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -763,7 +749,7 @@ GameObject:
   - component: {fileID: 1219033742527056991}
   m_Layer: 0
   m_Name: m_ingredients_fish_01
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

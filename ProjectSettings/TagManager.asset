@@ -9,6 +9,7 @@ TagManager:
   - Plate
   - Cook
   - Plane
+  - Ingredient
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - WorkTop
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

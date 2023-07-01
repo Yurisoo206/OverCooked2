@@ -17,14 +17,10 @@ public class CookTime : MonoBehaviour
         sliderTime.value = LimitTime;
     }
     void Update()
-    { 
-        if (playerControll.isCook)
-        {
-            Timer();
+    {
+        Timer();
 
-        }
-        
-      
+
     }
 
     private void Timer()

@@ -12,7 +12,7 @@ public class PlayerControll : MonoBehaviour
     private Animator ani;
     public bool ischeck = false;//그 도마 같은거 접촉
     public bool getCook = false;
-    public bool ishand = false;
+    public bool ishand = false;//손에 무언가 있는지 확인
 
     public GameObject[] hand_Grip = new GameObject[2];
     public GameObject[] hand_Open = new GameObject[2];
@@ -22,6 +22,9 @@ public class PlayerControll : MonoBehaviour
     public GameObject preWorkTop;//키 입력시 저장할 workTop;
     public GameObject preWorkTop_2;//키 입력시 저장할 workTop;
     public LayerMask layerMask;
+
+
+    public GameObject isWorkTop2;
 
     //행동
     public bool isRun = false;
@@ -56,7 +59,6 @@ public class PlayerControll : MonoBehaviour
         RaycastHit rayobject;
         if (Physics.Raycast(transform.position, transform.forward, out rayobject, 1f, layerMask))
         {
-            //Debug.Log(rayobject.transform.GetComponentsInParent<Transform>()[2].name);
             isWorkTop = rayobject.transform.GetComponentsInParent<Transform>()[2].gameObject;
 
             if (isWorkTop != null)
@@ -80,29 +82,29 @@ public class PlayerControll : MonoBehaviour
             transform.position += velocity * speed * Time.deltaTime;
             transform.LookAt(transform.position + velocity);          
         }
-        ani.SetBool("Run", isRun);
-    }
-    
-    private void DishRun()
-    {
-        isRun = false;
-
-        if ((playerInput.inputX != 0 || playerInput.inputZ != 0 ))
+        if (!ishand)
         {
-            isRun = true;
-            Vector3 velocity = new Vector3(playerInput.inputX, 0, playerInput.inputZ).normalized;
-            transform.position += velocity * speed * Time.deltaTime;
-            transform.LookAt(transform.position + velocity);
+            ani.SetBool("Run", isRun);
+        }
+        if (ishand)
+        {
+            ani.SetBool("DishRun", isRun);
         }
         
-        ani.SetBool("DishRun", isRun);
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ChppingBoard") && isCook)//다지기
+        {
+            cookware[0].SetActive(true);
+            ani.SetBool("Cook", true);
+        }
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("ChppingBoard") && Input.GetKeyDown(KeyCode.F))//다지기
+        if (other.CompareTag("ChppingBoard") && isCook)//다지기
         {
-            isCook = true;
             cookware[0].SetActive(true);
             ani.SetBool("Cook", true);
         }
@@ -120,9 +122,8 @@ public class PlayerControll : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("ChppingBoard"))
+        if (other.CompareTag("ChppingBoard") && !isCook)
         {
-            isCook = false;
             ani.SetBool("Cook", false);
             cookware[0].SetActive(false);
         }
