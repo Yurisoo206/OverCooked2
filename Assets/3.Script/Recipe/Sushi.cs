@@ -20,8 +20,7 @@ public class Sushi : MonoBehaviour
 
     private void Update()
     {
-        workTop_contact  = playerControll.preWorkTop;
-        workTop_contact2 = playerControll.preWorkTop;
+
     }
 
     private void Put()//스시 내려놓는거

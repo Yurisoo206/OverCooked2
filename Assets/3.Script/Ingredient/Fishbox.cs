@@ -20,7 +20,6 @@ public class Fishbox : MonoBehaviour
         ani = GetComponent<Animator>();
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && playerInput.isInteraction_space)

@@ -12,7 +12,6 @@ public class Timer_Slider : MonoBehaviour
     private void Start()
     {
         sliderTime = GetComponent<Slider>();
-        
         sliderTime.maxValue = LimitTime;
         sliderTime.value = LimitTime;
     }

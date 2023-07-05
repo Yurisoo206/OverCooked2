@@ -34,8 +34,6 @@ public class Timer : MonoBehaviour
 
             if (LimitTime < 60f)
             {
-               
-
                 if (sec >= 10)
                 {
                     text_Timer.text = "00:" + (int)LimitTime;

@@ -9,6 +9,7 @@ public class Worktop : MonoBehaviour
     public PlayerControll player;
 
     public MeshRenderer mesh;
+
     
 
     [SerializeField] bool isCheck = false;
@@ -30,6 +31,7 @@ public class Worktop : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
+        
         if (other.CompareTag("Player") && player.ischeck && player.isWorkTop != null && gameObject.name != player.isWorkTop.GetComponentsInChildren<Transform>()[2].name)
         {
             mesh.material = mat[0];

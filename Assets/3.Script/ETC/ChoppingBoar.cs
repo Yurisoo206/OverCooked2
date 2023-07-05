@@ -6,14 +6,21 @@ public class ChoppingBoar : MonoBehaviour
 {
     public PlayerControll player;
 
+    public bool isFood = false;
+
     GameObject knife = null;
+    GameObject ui = null;
     GameObject workTop = null;
+    GameObject test = null;
+
+    public LayerMask layerMask;
 
     private void Start()
     {
         player = FindObjectOfType<PlayerControll>();
         knife = transform.GetChild(3).gameObject;
-        workTop = transform.GetChild(0).gameObject;
+        ui = transform.GetChild(4).gameObject;
+        workTop = transform.GetComponentsInChildren<Transform>()[1].transform.gameObject;
     }
     private void Update()
     {
@@ -31,39 +38,48 @@ public class ChoppingBoar : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && 
-            (player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].name == workTop.name) &&
-            Input.GetKeyDown(KeyCode.E) )
+            Input.GetKeyDown(KeyCode.E) && 
+            workTop.name == player.isWorkTop2.GetComponentsInParent<Transform>()[2].name &&
+            !player.isCook
+            )
         {
+            knife.SetActive(false);
             player.isCook = true;
-            Debug.Log(" 이름이 뭐예여" + player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].name);
-            Debug.Log(" 내이름은" + workTop.name);
-            knife.gameObject.SetActive(false);
-        }
-        if (other.CompareTag("Player") &&
-            (player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].name != workTop.name))
-        {
-            player.isCook = false;
+            player.cookWorkTop = player.isWorkTop2;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") &&
-            (player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].name == workTop.name) &&
-            Input.GetKeyDown(KeyCode.E))
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && 
+            workTop.name == player.isWorkTop2.GetComponentsInParent<Transform>()[2].name &&
+            !player.isCook
+            )
         {
-            player.isCook = true;
-            Debug.Log(" 이름이 뭐예여"  + player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].name);
-            Debug.Log(" 내이름은"  + workTop.name);
-            knife.gameObject.SetActive(false);
+            RaycastHit rayobject;
+
+            if (Physics.Raycast(transform.position, transform.up, out rayobject, 6f, layerMask))
+            {
+                ui.SetActive(true);
+                knife.SetActive(false);
+                player.isCook = true;
+                player.cookWorkTop = player.isWorkTop2;
+                player.choppingBoar = gameObject;
+            }
+            Debug.DrawRay(transform.position, transform.up * 6f, Color.black);
         }
 
-        if (other.CompareTag("Player") &&
-            (player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].name != workTop.name))
+        if (other.CompareTag("Player") && player.isCook && player.cookWorkTop.name != player.isWorkTop2.name)
         {
             player.isCook = false;
         }
     }
 
-
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            player.isCook = false;
+        }
+    }
 }

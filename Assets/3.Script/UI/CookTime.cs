@@ -5,32 +5,43 @@ using UnityEngine.UI;
 
 public class CookTime : MonoBehaviour
 {
-    public PlayerControll playerControll;
+    public ChoppingBoar choppingBoar;
+    public PlayerControll player;
     public Slider sliderTime;
-    public float LimitTime = 150f;
+    private float timeNum = 3f;
+    GameObject cookCheck;
 
     private void Start()
     {
         sliderTime = GetComponent<Slider>();
-        playerControll = GetComponent<PlayerControll>();
-        sliderTime.maxValue = LimitTime;
-        sliderTime.value = LimitTime;
+        sliderTime.maxValue = timeNum;
+        sliderTime.value = 0;
+        cookCheck = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
+        player = FindObjectOfType<PlayerControll>();
     }
     void Update()
     {
-        Timer();
-
-
-    }
-
-    private void Timer()
-    {
-        LimitTime -= Time.deltaTime;
-        if (sliderTime.value > 0.0f)
+        if (cookCheck == player.choppingBoar && player.isCook)
         {
-            sliderTime.value -= Time.deltaTime;
+            Cooktime();
+        }
+        if (sliderTime.value == timeNum)
+        {
+            player.isCook = false;
+
+            sliderTime.value = 0;
+            GameObject isOff = GetComponentsInParent<Transform>()[1].gameObject;
+            isOff.SetActive(false);
+            player.cookend = true;
         }
     }
 
-    
+    public void Cooktime()
+    {
+        if (sliderTime.value < timeNum)
+        {
+            sliderTime.value += Time.deltaTime;
+            Debug.Log("ÀÌ¸§ÀÌ ¹¹°Ô : " + cookCheck.name);
+        }
+    }
 }

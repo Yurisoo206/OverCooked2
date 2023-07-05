@@ -5,18 +5,18 @@ using UnityEngine;
 public class Plate : MonoBehaviour
 {
     public Sushi sushi;
-    public PlayerControll playerComtroll;
+    public PlayerControll player;
 
     private void Start()
     {
         sushi = FindObjectOfType<Sushi>();
-        playerComtroll = FindObjectOfType<PlayerControll>();
+        player = FindObjectOfType<PlayerControll>();
     }
 
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !playerComtroll.ishand)
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand)
         {
             transform.SetParent(other.gameObject.transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].position;

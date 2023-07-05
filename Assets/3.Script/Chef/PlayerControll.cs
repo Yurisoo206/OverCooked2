@@ -13,18 +13,21 @@ public class PlayerControll : MonoBehaviour
     public bool ischeck = false;//그 도마 같은거 접촉
     public bool getCook = false;
     public bool ishand = false;//손에 무언가 있는지 확인
+    public bool cookend = false;//다지기 끝나고
 
     public GameObject[] hand_Grip = new GameObject[2];
     public GameObject[] hand_Open = new GameObject[2];
     public GameObject[] cookware  = new GameObject[2];
 
     public GameObject isWorkTop;// workTop 실시간 검출 중
-    public GameObject preWorkTop;//키 입력시 저장할 workTop;
-    public GameObject preWorkTop_2;//키 입력시 저장할 workTop;
+    public GameObject isWorkTop2;//키 입력시 저장할 workTop;
+
     public LayerMask layerMask;
 
 
-    public GameObject isWorkTop2;
+    
+    public GameObject cookWorkTop;
+    public GameObject choppingBoar;
 
     //행동
     public bool isRun = false;
@@ -108,16 +111,21 @@ public class PlayerControll : MonoBehaviour
             cookware[0].SetActive(true);
             ani.SetBool("Cook", true);
         }
-
-        if (other.CompareTag("WorkTop") && isWorkTop != null)//접촉한  workTop
+        if (other.CompareTag("ChppingBoard") && !isCook)//다지기 끝
         {
-            preWorkTop = isWorkTop;
+            cookware[0].SetActive(false);
+            ani.SetBool("Cook", false);
         }
 
-        if (other.CompareTag("WorkTop") && isWorkTop == null && ischeck)//접촉한  workTop
-        {
-            preWorkTop_2 = isWorkTop;
-        }
+        //if (other.CompareTag("WorkTop") && isWorkTop != null)//접촉한  workTop
+        //{
+        //    preWorkTop = isWorkTop;
+        //}
+
+        //if (other.CompareTag("WorkTop") && isWorkTop == null && ischeck)//접촉한  workTop
+        //{
+        //    preWorkTop_2 = isWorkTop;
+        //}
     }
 
     public void OnTriggerExit(Collider other)
