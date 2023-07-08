@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/1.Scene/SushiMap.unity
+    guid: bf2d2bf887369974fbd086a827ca5f6a
   m_configObjects: {}

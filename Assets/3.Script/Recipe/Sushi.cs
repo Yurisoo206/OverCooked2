@@ -4,77 +4,106 @@ using UnityEngine;
 
 public class Sushi : MonoBehaviour
 {
-    public PlayerControll playerControll;
-    public Worktop worktop;
-    private GameObject workTop_contact;
-    private GameObject workTop_contact2;
+    public PlayerControll player;
+
+    public GameObject sushi_prefed;
+    public GameObject sushi;
 
     public bool isplate = false;
+    public bool isCooking = false;//workTop 올리는 거
+
+    private GameObject workTopCheck;
+
+    private int preChildcount;
+    private bool check = false;
 
     private void Start()
     {
-        workTop_contact  = FindObjectOfType<GameObject>();
-        workTop_contact2 = FindObjectOfType<GameObject>();
-        playerControll = FindObjectOfType<PlayerControll>();
+        player = FindObjectOfType<PlayerControll>();
+        workTopCheck = GetComponent<GameObject>();
     }
 
-    private void Update()
+    public void OnTriggerEnter(Collider other)
     {
-
-    }
-
-    private void Put()//스시 내려놓는거
-    {
-        if (workTop_contact != null )
+        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space) && !isplate && !check)
         {
+            workTopCheck = other.gameObject;
+
+            Transform parentTransform = workTopCheck.transform;
+            int childCount = parentTransform.childCount;
+
+            preChildcount = childCount;
+            if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
+            {
+                check = true;
+                gameObject.transform.SetParent(null);
+                transform.SetParent(player.isWorkTop2.gameObject.transform);
+                transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                isCooking = true;
+            }
+            
+        }
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
+            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
+            !player.isPlate && !isplate
+            )
+        {
+            check = false;
             gameObject.transform.SetParent(null);
-            transform.position = workTop_contact.GetComponent<Transform>().position;
-            Debug.Log("이게 그 ray 쓴거 : " + workTop_contact.name);
+            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.SetParent(other.gameObject.transform);
         }
-        if (workTop_contact2 != null && workTop_contact == null)
+
+        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
         {
+            isplate = true;
             gameObject.transform.SetParent(null);
-            transform.position = workTop_contact2.GetComponent<Transform>().position;
-            Debug.Log(workTop_contact2);
+            transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
+            transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space))//스시 놓기
+        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space) && !isplate && !check)
         {
-            if (workTop_contact != null)
+            workTopCheck = other.gameObject;
+
+            Transform parentTransform = workTopCheck.transform;
+            int childCount = parentTransform.childCount;
+
+            preChildcount = childCount;
+            if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
+
+                check = true;
                 gameObject.transform.SetParent(null);
-                transform.position = workTop_contact.GetComponent<Transform>().position;
-                Debug.Log("이게 그 ray 쓴거 : " + workTop_contact.name);
+                transform.SetParent(player.isWorkTop2.gameObject.transform);
+                transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                isCooking = true;
             }
-            if (workTop_contact2 != null && workTop_contact == null)
-            {
-                gameObject.transform.SetParent(null);
-                //transform.position = workTop_contact2.GetComponent<Transform>().position;
-                //transform.position = other.transform.GetComponentsInParent<Transform>()[2].gameObject;
-                Debug.Log(workTop_contact2);
-            }
+
+        }
+
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
+            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && 
+            !player.isPlate && !isplate
+            
+            )
+        {
+            check = false;
+            gameObject.transform.SetParent(null);
+            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.SetParent(other.gameObject.transform);
+        }
+
+        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
+        {
+            isplate = true;
+            gameObject.transform.SetParent(null);
+            transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
+            transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space))//스시 놓기
-        {
-            if (workTop_contact != null)
-            {
-                gameObject.transform.SetParent(null);
-                transform.position = workTop_contact.GetComponent<Transform>().position;
-                Debug.Log("이게 그 ray 쓴거 : " + workTop_contact.name);
-            }
-            if (workTop_contact2 != null && workTop_contact == null)
-            {
-                gameObject.transform.SetParent(null);
-                transform.position = workTop_contact2.GetComponent<Transform>().position;
-                Debug.Log(workTop_contact2);
-            }
-        }
-    }
 }

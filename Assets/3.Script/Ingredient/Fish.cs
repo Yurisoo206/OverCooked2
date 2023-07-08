@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Fish : MonoBehaviour
 {
-    public PlayerControll playerControll;
+    public PlayerControll player;
 
     public GameObject sushi_prefed;
     public GameObject sushi;
@@ -14,25 +14,43 @@ public class Fish : MonoBehaviour
     public bool isCooking = false;//workTop 올리는 거
     public bool isCook = false;//다지는 중인거
 
+    private GameObject workTopCheck;
+
+    private int preChildcount;
+    private bool check = false;
 
     private void Start()
     {
-        playerControll = FindObjectOfType<PlayerControll>();
+        player = FindObjectOfType<PlayerControll>();
+        workTopCheck = GetComponent<GameObject>();
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space) && !isplate)
+        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space) && !check)
         {
-            gameObject.transform.SetParent(null);
-            transform.SetParent(playerControll.isWorkTop2.gameObject.transform);
-            transform.position = playerControll.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
-            isCooking = true;
+            workTopCheck = other.gameObject;
+
+            Transform parentTransform = workTopCheck.transform;
+            int childCount = parentTransform.childCount;
+
+            preChildcount = childCount;
+            if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
+            {
+                check = true;
+
+                gameObject.transform.SetParent(null);
+                transform.SetParent(player.isWorkTop2.gameObject.transform);
+                transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                isCooking = true;
+            }
         }
+
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
-            playerControll.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name
+            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !player.ishand
             )
         {
+            check = false;
             gameObject.transform.SetParent(null);
             transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.SetParent(other.gameObject.transform);
@@ -41,41 +59,41 @@ public class Fish : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Plate") )
+        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space) && !check)
         {
-            Debug.Log("그릇이라고");
-            isplate = true;
-        }   
+            workTopCheck = other.gameObject;
 
-        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space) && !isplate)//내려놓기
-        {
-            gameObject.transform.SetParent(null);
-            transform.SetParent(playerControll.isWorkTop2.gameObject.transform);
-            transform.position = playerControll.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
-            Debug.Log("현재 위치" + playerControll.isWorkTop2.name);
-            Debug.Log("현재 위치" + gameObject.GetComponentsInParent<Transform>()[1].name);
-            isCooking = true;
+            Transform parentTransform = workTopCheck.transform;
+            int childCount = parentTransform.childCount;
+
+            preChildcount = childCount;
+            if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
+            {
+                check = true;
+                gameObject.transform.SetParent(null);
+                transform.SetParent(player.isWorkTop2.gameObject.transform);
+                transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                isCooking = true;
+            }
         }
-
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
-            playerControll.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name
+            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !player.ishand
             )
         {
+            check = false;
             gameObject.transform.SetParent(null);
             transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.SetParent(other.gameObject.transform);
         }
 
-        if (other.CompareTag("Player") && 
-            playerControll.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
-            playerControll.cookend
-            
+        if (other.CompareTag("Player") &&
+            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
+            player.cookend
             )//다지기
         {
-            playerControll.cookend = false;
+            player.cookend = false;
             sushi = Instantiate(sushi_prefed, gameObject.transform.position, gameObject.transform.rotation);
             sushi.transform.SetParent(gameObject.GetComponentsInParent<Transform>()[1].transform);
-            Debug.Log("이제 여기로 들어가라 : " + gameObject.GetComponentsInParent<Transform>()[1].name );
             Destroy(gameObject);
         }
 
@@ -85,17 +103,4 @@ public class Fish : MonoBehaviour
         }
     }
 
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Plate"))
-        {
-            Debug.Log("접시에서 아웃");
-            isplate = false;
-        }
-        if (other.CompareTag("ChppingBoard") && isCooking)
-        {
-            isCooking = false;
-            Debug.Log("나감 : " + other.gameObject.name);
-        }
-    }
 }
