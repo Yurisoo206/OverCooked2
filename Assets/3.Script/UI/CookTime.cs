@@ -41,7 +41,6 @@ public class CookTime : MonoBehaviour
         if (sliderTime.value < timeNum)
         {
             sliderTime.value += Time.deltaTime;
-            Debug.Log("ÀÌ¸§ÀÌ ¹¹°Ô : " + cookCheck.name);
         }
     }
 }

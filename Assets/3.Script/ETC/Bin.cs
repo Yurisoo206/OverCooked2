@@ -6,7 +6,7 @@ public class Bin : MonoBehaviour
 {
     public PlayerControll player;
 
-    private GameObject workTop;
+    private GameObject trash;
 
     void Start()
     {
@@ -15,19 +15,27 @@ public class Bin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && (gameObject.name == player.isWorkTop2.GetComponentsInParent<Transform>()[2].name))
+        if (other.CompareTag("Player") && (gameObject.name == player.isWorkTop2.GetComponentsInParent<Transform>()[2].name) && player.ishand)
         {
-            Debug.Log("하아,, 이제 좀 쉽게 가자 : " + player.isWorkTop2.GetComponentsInParent<Transform>()[2].name);
-            Debug.Log("하 : " + gameObject.name);
+            player.ishand = false;
+            Debug.Log("하 : " + other.gameObject.transform.GetChild(2).name);
+            trash = other.transform.GetChild(2).gameObject;
+            Debug.Log("잘 들어간겨? : " + trash.name);
+            trash.transform.SetParent(null);
+            //trash.transform.position = gameObject.transform.GetChild(0).position;       
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && (gameObject.name == player.isWorkTop2.GetComponentsInParent<Transform>()[2].name))
+        if (other.CompareTag("Player") && (gameObject.name == player.isWorkTop2.GetComponentsInParent<Transform>()[2].name) && player.ishand )
         {
-            Debug.Log("하아,, 이제 좀 쉽게 가자 : " + player.isWorkTop2.GetComponentsInParent<Transform>()[2].name);
-            Debug.Log("하 : " + gameObject.name);
+            player.ishand = false;
+            Debug.Log("하 : " + other.gameObject.transform.GetChild(2).name);
+            trash = other.transform.GetChild(2).gameObject;
+            Debug.Log("잘 들어간겨? : " + trash.name);
+            trash.transform.SetParent(null);
+            //trash.transform.position = gameObject.transform.GetChild(0).position;     
         }
     }
 }

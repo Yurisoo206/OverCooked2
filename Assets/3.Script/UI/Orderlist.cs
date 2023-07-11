@@ -7,11 +7,11 @@ public class Orderlist : MonoBehaviour
     public CompleteDish dish;
     public Transform respawn;
 
-    public Transform order1;
-    public Transform order2;
-    public Transform order3;
-    public Transform order4;
-    public Transform order5;
+    public GameObject order1;
+    public GameObject order2;
+    public GameObject order3;
+    public GameObject order4;
+    public GameObject order5;//Transform으로 바꿔라
 
     public GameObject sheet1;
     public GameObject sheet2;
@@ -19,7 +19,14 @@ public class Orderlist : MonoBehaviour
     public GameObject randomSheet;
 
     public GameObject order;
-    List<GameObject> orderList = new List<GameObject>();
+
+
+    public GameObject sheet1_prefed;
+    public GameObject sheet2_prefed;
+
+    List<GameObject> orderList = new List<GameObject>();//그 생성
+    public GameObject[] setList;
+    
     public int orderNum = 5;
 
     private int num = 0;
@@ -29,6 +36,9 @@ public class Orderlist : MonoBehaviour
     private void Start()
     {
         dish = FindObjectOfType<CompleteDish>();
+        setList = new GameObject[3];
+
+        setList[0] = order1;
     }
 
 
@@ -37,12 +47,15 @@ public class Orderlist : MonoBehaviour
         StartOrder();
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            sheet1 = sheet1_prefed;
+            sheet2 = sheet2_prefed;
             RandomOrder();
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
             OrderClear();
         }
+
     }
 
     public void StartOrder()
@@ -75,7 +88,8 @@ public class Orderlist : MonoBehaviour
     {
         RandomSheet();
         orderList.Add(randomSheet);
-
+        order = Instantiate(randomSheet, respawn.position, respawn.rotation);
+        order.transform.SetParent(gameObject.transform);
         for (int i = 0; i < orderList.Count; i++)
         {        
             Debug.Log("배열 확인 : " + orderList[i].name);
@@ -99,6 +113,5 @@ public class Orderlist : MonoBehaviour
 
             check = false;
         }
-        
     }                                                                           
 }
