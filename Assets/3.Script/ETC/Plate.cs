@@ -11,6 +11,10 @@ public class Plate : MonoBehaviour
     private int preChildcount;
     private bool check = false;
 
+
+    public bool fish = false;
+    public bool prawn = false;
+
     private void Start()
     {
         sushi = FindObjectOfType<Sushi>();
@@ -30,7 +34,6 @@ public class Plate : MonoBehaviour
             preChildcount = childCount;
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
-                Debug.Log("숫자 : "+ preChildcount);
                 check = true;
                 gameObject.transform.SetParent(null);
                 player.isPlate = false;
@@ -58,6 +61,9 @@ public class Plate : MonoBehaviour
             gameObject.transform.SetParent(null);
             transform.SetParent(player.isWorkTop2.gameObject.transform);
             transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+            fish = true;
+            this.gameObject.layer = 9;
+            cookCheck();
         }
     }
 
@@ -73,7 +79,6 @@ public class Plate : MonoBehaviour
             preChildcount = childCount;
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
-                Debug.Log("숫자 : " + preChildcount);
                 check = true;
                 gameObject.transform.SetParent(null);
                 player.isPlate = false;
@@ -95,11 +100,36 @@ public class Plate : MonoBehaviour
             transform.SetParent(other.gameObject.transform);
         }
 
-        if (other.CompareTag("Cook") && Input.GetKeyDown(KeyCode.Space) && player.isPlate)
+        if (other.CompareTag("Sushi") && Input.GetKeyDown(KeyCode.Space) && player.isPlate)
         {
             gameObject.transform.SetParent(null);
             transform.SetParent(player.isWorkTop2.gameObject.transform);
             transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+            fish = true;
+            this.gameObject.layer = 9;
+            cookCheck();
+        }
+
+        if (other.CompareTag("Prawn") && Input.GetKeyDown(KeyCode.Space) && player.isPlate)
+        {
+            gameObject.transform.SetParent(null);
+            transform.SetParent(player.isWorkTop2.gameObject.transform);
+            transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+            fish = true;
+            this.gameObject.layer = 9;
+            cookCheck();
+        }
+    }
+
+    private void cookCheck()
+    {
+        if (fish)
+        {
+            this.gameObject.tag = "SushiCook";
+        }
+        if (prawn)
+        {
+            this.gameObject.tag = "PrawnCook";
         }
     }
 }

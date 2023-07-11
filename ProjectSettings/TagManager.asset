@@ -10,6 +10,10 @@ TagManager:
   - Cook
   - Plane
   - Ingredient
+  - Sushi
+  - Prawn
+  - SushiCook
+  - PrawnCook
   layers:
   - Default
   - TransparentFX
@@ -19,8 +23,8 @@ TagManager:
   - UI
   - Player
   - Ingredient
-  - 
-  - 
+  - ThePass
+  - CompleteDish
   - 
   - 
   - 

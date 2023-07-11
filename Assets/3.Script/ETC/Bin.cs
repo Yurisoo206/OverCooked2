@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Bin : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public PlayerControll player;
+
+    private GameObject workTop;
+
     void Start()
     {
-        
+        player = FindObjectOfType<PlayerControll>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player") && (gameObject.name == player.isWorkTop2.GetComponentsInParent<Transform>()[2].name))
+        {
+            Debug.Log("하아,, 이제 좀 쉽게 가자 : " + player.isWorkTop2.GetComponentsInParent<Transform>()[2].name);
+            Debug.Log("하 : " + gameObject.name);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && (gameObject.name == player.isWorkTop2.GetComponentsInParent<Transform>()[2].name))
+        {
+            Debug.Log("하아,, 이제 좀 쉽게 가자 : " + player.isWorkTop2.GetComponentsInParent<Transform>()[2].name);
+            Debug.Log("하 : " + gameObject.name);
+        }
     }
 }

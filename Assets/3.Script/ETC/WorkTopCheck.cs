@@ -6,7 +6,6 @@ public class WorkTopCheck : MonoBehaviour
 {
     public LayerMask layerMask;
 
-    public GameObject gameObject;
 
     private void Update()
     {

@@ -6,9 +6,6 @@ public class Sushi : MonoBehaviour
 {
     public PlayerControll player;
 
-    public GameObject sushi_prefed;
-    public GameObject sushi;
-
     public bool isplate = false;
     public bool isCooking = false;//workTop 올리는 거
 
@@ -56,10 +53,13 @@ public class Sushi : MonoBehaviour
 
         if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
         {
-            isplate = true;
+            //isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
+            this.gameObject.layer = 9;
+            //this.gameObject.tag = "Sushi";
         }
     }
 
@@ -99,10 +99,13 @@ public class Sushi : MonoBehaviour
 
         if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
         {
-            isplate = true;
+            //isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
+            this.gameObject.layer = 9;
+            //this.gameObject.tag = "Sushi";
         }
     }
 

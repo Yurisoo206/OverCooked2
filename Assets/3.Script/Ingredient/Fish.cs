@@ -35,6 +35,7 @@ public class Fish : MonoBehaviour
             int childCount = parentTransform.childCount;
 
             preChildcount = childCount;
+
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
                 check = true;

@@ -32,34 +32,12 @@ public class Worktop : MonoBehaviour
             mesh.material = mat[1];
             player.ischeck = true;
             player.isWorkTop2 = gameObject;
-
-            //Transform parentTransform = gameObject.transform;
-            //int childCount = parentTransform.childCount;
-            
-            //preChildcount = childCount;
-            //if (preChildcount < 3)
-            //{
-            //    check = true;
-                
-            
-            //}
-
         }
         else if (other.CompareTag("Player") && !player.ischeck && player.isWorkTop == null)//위에 두개는 ray 인식이 기준 여기서는 인식 안 할때를 기준으로 오브젝트 생성;
         {
             mesh.material = mat[1];
             player.ischeck = true;
             player.isWorkTop2 = gameObject;
-            //Transform parentTransform = workTopCheck.transform;
-            //int childCount = parentTransform.childCount;
-
-            //preChildcount = childCount;
-            //if (preChildcount < 3)
-            //{
-            //    check = true;
-            //    Debug.Log(" 야씨 성공 각이다ㅏㅏㅏ");
-
-            //}
         }
     }
 
@@ -76,33 +54,12 @@ public class Worktop : MonoBehaviour
             mesh.material = mat[1];
             player.ischeck = true;
             player.isWorkTop2 = gameObject;
-            //Transform parentTransform = workTopCheck.transform;
-            //int childCount = parentTransform.childCount;
-
-            //preChildcount = childCount;
-            //if (preChildcount < 3)
-            //{
-            //    check = true;
-            //    Debug.Log(" 야씨 성공 각이다ㅏㅏㅏ");
-
-            //}
-
         }
         else if(other.CompareTag("Player") && !player.ischeck && player.isWorkTop == null)//위에 두개는 ray 인식이 기준 여기서는 인식 안 할때를 기준으로 오브젝트 생성;
         {
             mesh.material = mat[1];
             player.ischeck = true;
             player.isWorkTop2 = gameObject;
-            //Transform parentTransform = workTopCheck.transform;
-            //int childCount = parentTransform.childCount;
-
-            //preChildcount = childCount;
-            //if (preChildcount < 3)
-            //{
-            //    check = true;
-            //    Debug.Log(" 야씨 성공 각이다ㅏㅏㅏ");
-
-            //}
         }
     }
     public void OnTriggerExit(Collider other)
