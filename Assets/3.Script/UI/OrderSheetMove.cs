@@ -6,13 +6,24 @@ public class OrderSheetMove : MonoBehaviour
 {
     public Orderlist orderlist;
 
+    private GameObject test;
+
     void Start()
     {
         orderlist = FindObjectOfType<Orderlist>();
+        test = GetComponent<GameObject>();
+
     }
 
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, orderlist.transform.position, 0.2f);
+        //transform.position = Vector3.Lerp(transform.position, orderlist.sheetPos.transform.position, 0.2f);
+    }
+
+
+    public void SavePos()
+    {
+        test = orderlist.sheetPos;
+
     }
 }
