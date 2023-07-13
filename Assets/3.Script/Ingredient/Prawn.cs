@@ -41,6 +41,7 @@ public class Prawn : MonoBehaviour
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
                 transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                transform.rotation = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].rotation;
                 isCooking = true;
             }
         }
@@ -72,6 +73,7 @@ public class Prawn : MonoBehaviour
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
                 transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                transform.rotation = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].rotation;
                 isCooking = true;
             }
         }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2737202803186727984}
   m_Layer: 0
   m_Name: Prawn_fried_01
-  m_TagString: Cook
+  m_TagString: Prawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   player: {fileID: 0}
   isplate: 0
   isCooking: 0
+  UI_Prefad: {fileID: 2136986126254489877, guid: b416fbf28f5ecd246ab86f2434648c8b, type: 3}
 --- !u!65 &2737202803186727984
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59,7 +60,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.2, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4631442130011685925
 GameObject:

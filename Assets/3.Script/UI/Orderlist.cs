@@ -13,6 +13,9 @@ public class Orderlist : MonoBehaviour
     public GameObject order4;
     public GameObject order5;//Transform으로 바꿔라
 
+    
+    public GameObject OrderSheet;
+    
     public GameObject sheet1;
     public GameObject sheet2;
 
@@ -25,10 +28,11 @@ public class Orderlist : MonoBehaviour
 
     List<GameObject> orderList = new List<GameObject>();//그 생성
     public GameObject[] setList;
-    
-    public int orderNum = 5;
 
     private int num = 0;
+    private int numcheck = 0;//주문서에 없는 메뉴를 제출 했는지 확인하기 위해
+
+    public int completeDish = 0;
 
     public bool check = false;
     public bool test = false;
@@ -46,8 +50,7 @@ public class Orderlist : MonoBehaviour
     }
 
     void Update()
-    {
-        
+    { 
         //StartOrder();
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -55,16 +58,17 @@ public class Orderlist : MonoBehaviour
             sheet2 = sheet2_prefed;
             RandomOrder();
         }
-        if (Input.GetKeyDown(KeyCode.T))
+        if (dish.check)
         {
             OrderClear();
+            dish.check = false;
         }
     }
 
     public void StartOrder()
     {
-        //sheet1.transform.position = Vector3.Lerp(sheet1.transform.position, order1.transform.position, 0.2f);
-        //sheet2.transform.position = Vector3.Lerp(sheet2.transform.position, order2.transform.position, 0.2f);
+        sheet1.transform.position = Vector3.Lerp(sheet1.transform.position, order1.transform.position, 0.2f);
+        sheet2.transform.position = Vector3.Lerp(sheet2.transform.position, order2.transform.position, 0.2f);
         if (num < 1)
         {
             orderList.Add(sheet1);
@@ -108,8 +112,6 @@ public class Orderlist : MonoBehaviour
                     setList[i] = order.gameObject;
                     break;
                 }
-
-                Debug.Log("모르겠다고 : " + setList[i].gameObject);
             }
 
             for (int i = 0; i < orderList.Count; i++)
@@ -151,68 +153,75 @@ public class Orderlist : MonoBehaviour
      
     public void OrderClear()
     {
+        
+        if (completeDish == 1)
+        {
+            OrderSheet = sheet1;
+        }
+        else if (completeDish == 2)
+        {
+            OrderSheet = sheet2;
+        }
+
         for (int i = 0; i < orderList.Count; i++)
         {
-            if (orderList[i].tag == sheet1.tag)
+            
+            if (orderList[i].tag == OrderSheet.tag)
             {
-                //Debug.Log("이거 삭제해" + orderList[i].name);
-                orderList.RemoveAt(i);
-
                 Destroy(setList[i].gameObject);
-                
-                Debug.Log("이거 삭제해" + setList[i] + i);
-                setList[i] = null;
-                check = true;
+                orderList.RemoveAt(i); 
+
                 break;
+            }
+            else
+            {
+                numcheck++;
             }
         }
 
         for (int i = 0; i < orderList.Count; i++)
         {
-            if (setList[i] = null)
+            if (setList[i] != orderList[i])
             {
-                Debug.Log("으어어");
-                //Debug.Log("아 지친다 진짜");
                 setList[i] = setList[i + 1];
                 setList[i + 1] = null;
             }
-
-            Debug.Log("오더" + orderList[i] +i);
         }
 
-        //if (check)
-        //{
-        //    for (int i = 0; i < orderList.Count; i++)
-        //    {
-        //        if (setList[i] == orderList[0])
-        //        {
-        //            sheetPos = order1;
-        //            setList[i].transform.position = sheetPos.transform.position;
-        //        }
-        //        else if (setList[i] == orderList[1])
-        //        {
-        //            sheetPos = order2;
-        //            setList[i].transform.position = sheetPos.transform.position;
-        //        }
-        //        else if (setList[i] == orderList[2])
-        //        {
-        //            sheetPos = order3;
-        //            setList[i].transform.position = sheetPos.transform.position;
-        //        }
-        //        else if (setList[i] == orderList[3])
-        //        {
-        //            sheetPos = order4;
-        //            setList[i].transform.position = sheetPos.transform.position;
-        //        }
-        //        else if (setList[i] == orderList[4])
-        //        {
-        //            sheetPos = order5;
-        //            setList[i].transform.position = sheetPos.transform.position;
-        //        }
-        //    }
+        for (int i = 0; i < orderList.Count; i++)
+        {
+            if (setList[i] == orderList[0])
+            {
+                sheetPos = order1;
+                setList[i].transform.position = sheetPos.transform.position;
+            }
+            else if (setList[i] == orderList[1])
+            {
+                sheetPos = order2;
+                setList[i].transform.position = sheetPos.transform.position;
+            }
+            else if (setList[i] == orderList[2])
+            {
+                sheetPos = order3;
+                setList[i].transform.position = sheetPos.transform.position;
+            }
+            else if (setList[i] == orderList[3])
+            {
+                sheetPos = order4;
+                setList[i].transform.position = sheetPos.transform.position;
+            }
+            else if (setList[i] == orderList[4])
+            {
+                sheetPos = order5;
+                setList[i].transform.position = sheetPos.transform.position;
+            }
+        }
 
-        //    check = false;
-        //}
-
+        if (numcheck == orderList.Count)
+        {
+            Debug.Log("뭐야 왜 주문 안한거 줌? 별점 1점 드립니다.");
+        }
+        completeDish = 0;
+        numcheck = 0;
     }
 }

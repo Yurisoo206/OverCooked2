@@ -9,15 +9,25 @@ public class PrawnFire : MonoBehaviour
     public bool isplate = false;
     public bool isCooking = false;//workTop 올리는 거
 
+    public GameObject UI_Prefad;
+    private GameObject UI;
     private GameObject workTopCheck;
+    private GameObject plateTag;
 
     private int preChildcount;
     private bool check = false;
 
     private void Start()
     {
+        UI = Instantiate(UI_Prefad, transform.position, Quaternion.identity, transform);
+        UI.transform.rotation = transform.rotation.normalized;
         player = FindObjectOfType<PlayerControll>();
         workTopCheck = GetComponent<GameObject>();
+    }
+
+    private void Update()
+    {
+        //UI.transform.position = transform.position;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -58,8 +68,10 @@ public class PrawnFire : MonoBehaviour
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
-            this.gameObject.layer = 9;
-            //this.gameObject.tag = "Sushi";
+
+            plateTag = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
+            plateTag.layer = 9;
+            plateTag.tag = "PrawnCook";
         }
     }
 
@@ -98,13 +110,15 @@ public class PrawnFire : MonoBehaviour
 
         if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
         {
-            //isplate = true;
+            isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
-            this.gameObject.layer = 9;
-            //this.gameObject.tag = "Sushi";
+
+            plateTag = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
+            plateTag.layer = 9;
+            plateTag.tag = "PrawnCook";
         }
     }
 }

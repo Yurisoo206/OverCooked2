@@ -23,7 +23,7 @@ public class OrderSheetMove : MonoBehaviour
 
     public void SavePos()
     {
-        test = orderlist.sheetPos;
+        this.test = orderlist.sheetPos;
 
     }
 }

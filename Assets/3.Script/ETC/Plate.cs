@@ -40,6 +40,7 @@ public class Plate : MonoBehaviour
 
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
                 transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                transform.rotation = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].rotation;
             }
         }
 
@@ -55,15 +56,31 @@ public class Plate : MonoBehaviour
             transform.SetParent(other.gameObject.transform);
         }
 
-        if (other.CompareTag("Cook") && Input.GetKeyDown(KeyCode.Space) && player.isPlate )
+        if (other.CompareTag("Sushi"))
         {
-
-            gameObject.transform.SetParent(null);
-            transform.SetParent(player.isWorkTop2.gameObject.transform);
-            transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
-            fish = true;
-            this.gameObject.layer = 9;
-            cookCheck();
+            GameObject cook = other.gameObject;
+            if (cook.GetComponentsInParent<Transform>()[1].name == player.isWorkTop2.name && Input.GetKeyDown(KeyCode.Space))
+            {
+                gameObject.transform.SetParent(null);
+                transform.SetParent(player.isWorkTop2.gameObject.transform);
+                transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                fish = true;
+                this.gameObject.layer = 9;
+                gameObject.tag = "SushiCook";
+            }
+        }
+        if (other.CompareTag("Prawn"))
+        {
+            GameObject cook = other.gameObject;
+            if (cook.GetComponentsInParent<Transform>()[1].name == player.isWorkTop2.name && Input.GetKeyDown(KeyCode.Space))
+            {
+                gameObject.transform.SetParent(null);
+                transform.SetParent(player.isWorkTop2.gameObject.transform);
+                transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                fish = true;
+                this.gameObject.layer = 9;
+                gameObject.tag = "PrawnCook";
+            }
         }
     }
 
@@ -85,6 +102,7 @@ public class Plate : MonoBehaviour
 
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
                 transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                transform.rotation = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].rotation;
             }
         }
 
@@ -100,36 +118,32 @@ public class Plate : MonoBehaviour
             transform.SetParent(other.gameObject.transform);
         }
 
-        if (other.CompareTag("Sushi") && Input.GetKeyDown(KeyCode.Space) && player.isPlate)
+        if (other.CompareTag("Sushi"))
         {
-            gameObject.transform.SetParent(null);
-            transform.SetParent(player.isWorkTop2.gameObject.transform);
-            transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
-            fish = true;
-            this.gameObject.layer = 9;
-            cookCheck();
+            GameObject cook = other.gameObject;
+            if (cook.GetComponentsInParent<Transform>()[1].name == player.isWorkTop2.name && Input.GetKeyDown(KeyCode.Space))
+            {
+                gameObject.transform.SetParent(null);
+                transform.SetParent(player.isWorkTop2.gameObject.transform);
+                transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                fish = true;
+                this.gameObject.layer = 9;
+                gameObject.tag = "SushiCook";
+            }
         }
-
-        if (other.CompareTag("Prawn") && Input.GetKeyDown(KeyCode.Space) && player.isPlate)
+        if (other.CompareTag("Prawn"))
         {
-            gameObject.transform.SetParent(null);
-            transform.SetParent(player.isWorkTop2.gameObject.transform);
-            transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
-            fish = true;
-            this.gameObject.layer = 9;
-            cookCheck();
-        }
-    }
-
-    private void cookCheck()
-    {
-        if (fish)
-        {
-            this.gameObject.tag = "SushiCook";
-        }
-        if (prawn)
-        {
-            this.gameObject.tag = "PrawnCook";
+            GameObject cook = other.gameObject;
+            if (cook.GetComponentsInParent<Transform>()[1].name == player.isWorkTop2.name && Input.GetKeyDown(KeyCode.Space))
+            {
+                gameObject.transform.SetParent(null);
+                transform.SetParent(player.isWorkTop2.gameObject.transform);
+                transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
+                fish = true;
+                this.gameObject.layer = 9;
+                gameObject.tag = "SushiCook";
+            }
         }
     }
+
 }
