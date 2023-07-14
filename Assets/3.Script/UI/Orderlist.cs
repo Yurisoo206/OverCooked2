@@ -37,49 +37,58 @@ public class Orderlist : MonoBehaviour
     public bool check = false;
     public bool test = false;
 
+    private float time = 0f;
+    private bool timecheck = true;
 
     //일단 sheet 생성시 받아갈 위치 
     public GameObject sheetPos;
-
+    
 
     private void Start()
     {
         dish = FindObjectOfType<CompleteDish>();
         setList = new GameObject[5];
-        
+        sheet1 = sheet1_prefed;
+        sheet2 = sheet2_prefed;
     }
 
     void Update()
-    { 
-        //StartOrder();
+    {
+        StartOrder();
+        if (time < 150f)
+        {
+            time += Time.deltaTime;
+            if ((int)time%20 == 1 && timecheck)
+            {
+                Debug.Log("자자 주문 들어옵니다 아 씨 냉모밀 먹고 싶다");
+                RandomOrder();
+                timecheck = false;
+            }
+
+
+            if ((int)time % 10 == 2 && !timecheck)
+            {
+                timecheck = transform;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            sheet1 = sheet1_prefed;
-            sheet2 = sheet2_prefed;
             RandomOrder();
         }
         if (dish.check)
         {
             OrderClear();
             dish.check = false;
+            if (orderList.Count <= 2)
+            {
+                RandomOrder();
+            }
+            
         }
     }
 
-    public void StartOrder()
-    {
-        sheet1.transform.position = Vector3.Lerp(sheet1.transform.position, order1.transform.position, 0.2f);
-        sheet2.transform.position = Vector3.Lerp(sheet2.transform.position, order2.transform.position, 0.2f);
-        if (num < 1)
-        {
-            orderList.Add(sheet1);
-            orderList.Add(sheet2);
-
-            setList[0] = sheet1;
-            setList[1] = sheet2;
-
-            num++;
-        }
-    }
+    
 
     public void RandomSheet()
     {
@@ -92,6 +101,15 @@ public class Orderlist : MonoBehaviour
         else if (randomOrder == 2)
         {
             randomSheet = sheet2;
+        }
+    }
+
+    public void StartOrder()
+    {
+        if (num < 1)
+        {
+            RandomOrder();
+            num++;
         }
     }
 
