@@ -92,7 +92,7 @@ public class Fish : MonoBehaviour
         if (other.CompareTag("Player") &&
             player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
             player.cookend
-            )//다지기
+            )//다지기 끝
         {
             player.cookend = false;
             sushi = Instantiate(sushi_prefed, gameObject.transform.position, gameObject.transform.rotation);
@@ -100,10 +100,30 @@ public class Fish : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (other.CompareTag("Player") &&
+            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
+            player.isCook
+            )//다지기 중
+        {
+            Debug.Log("파티클 실행할 예정");
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        
         if (other.CompareTag("ChppingBoard") && !isCooking)
         {
             isCooking = true;
         }
     }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && !player.isCook)
+        {
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            Debug.Log("파티클 끌 예정");
+        }
+    }
+
+
 
 }

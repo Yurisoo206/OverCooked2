@@ -145,7 +145,6 @@ public class PlayerControll : MonoBehaviour
         {
             if (plate != other.gameObject)
             {
-                Debug.Log("잘되어가고 있니...?" + other.gameObject.name);
                 plate = other.gameObject;
                 hasCollision = true;
             }

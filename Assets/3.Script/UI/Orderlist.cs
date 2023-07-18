@@ -35,7 +35,7 @@ public class Orderlist : MonoBehaviour
     public int completeDish = 0;
 
     public bool check = false;
-    public bool test = false;
+    public bool ordersheetCheck = false;
 
     private float time = 0f;
     private bool timecheck = true;
@@ -76,8 +76,9 @@ public class Orderlist : MonoBehaviour
         {
             RandomOrder();
         }
-        if (dish.check)
+        if (dish.check || ordersheetCheck)
         {
+            Debug.Log("설마 되는 건가 두그두그두그");
             OrderClear();
             dish.check = false;
             if (orderList.Count <= 2)
@@ -86,6 +87,7 @@ public class Orderlist : MonoBehaviour
             }
             
         }
+
     }
 
     
@@ -239,7 +241,9 @@ public class Orderlist : MonoBehaviour
         {
             Debug.Log("뭐야 왜 주문 안한거 줌? 별점 1점 드립니다.");
         }
+
         completeDish = 0;
         numcheck = 0;
+        ordersheetCheck = false;
     }
 }

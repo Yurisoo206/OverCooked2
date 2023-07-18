@@ -837,6 +837,7 @@ GameObject:
   - component: {fileID: 20755787476055688}
   - component: {fileID: 2279518360862228473}
   - component: {fileID: 204202187673117318}
+  - component: {fileID: 1824265981884542074}
   m_Layer: 5
   m_Name: OtherSushi
   m_TagString: Sushi
@@ -914,12 +915,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6171196393974899268}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13372b5d2204e834ca4b9dbb80c51adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orderlist: {fileID: 0}
+--- !u!114 &1824265981884542074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6171196393974899268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf3bb91887df884e9372c9a2e73b58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7152381407992416616
 GameObject:
   m_ObjectHideFlags: 0

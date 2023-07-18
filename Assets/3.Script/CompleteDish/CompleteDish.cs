@@ -41,12 +41,12 @@ public class CompleteDish : MonoBehaviour
             if (dish.tag == "SushiCook")
             {
                 orderlist.completeDish = 1;
-                score.score += 28;
+                //score.score += 28;
             }
             else if (dish.tag == "PrawnCook")
             {
                 orderlist.completeDish = 2;
-                score.score += 30;
+                //score.score += 30;
             }
             check = true;
             
