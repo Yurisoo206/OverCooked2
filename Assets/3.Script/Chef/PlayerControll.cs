@@ -124,7 +124,7 @@ public class PlayerControll : MonoBehaviour
         {
             plate = other.gameObject;
             hasCollision = true;
-            Debug.Log(other.gameObject.name);
+            
         }
     }
 

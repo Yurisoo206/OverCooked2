@@ -30,11 +30,11 @@ public class Orderlist : MonoBehaviour
     public GameObject[] setList;
 
     private int num = 0;
-    private int numcheck = 0;//주문서에 없는 메뉴를 제출 했는지 확인하기 위해
+    private int numcheck = 1;//주문서에 없는 메뉴를 제출 했는지 확인하기 위해
 
     public int completeDish = 0;
 
-    public bool check = false;
+    //public bool check = false;
     public bool ordersheetCheck = false;
 
     private float time = 0f;
@@ -60,7 +60,7 @@ public class Orderlist : MonoBehaviour
             time += Time.deltaTime;
             if ((int)time%20 == 1 && timecheck)
             {
-                Debug.Log("자자 주문 들어옵니다 아 씨 냉모밀 먹고 싶다");
+
                 RandomOrder();
                 timecheck = false;
             }
@@ -78,10 +78,11 @@ public class Orderlist : MonoBehaviour
         }
         if (dish.check || ordersheetCheck)
         {
-            Debug.Log("설마 되는 건가 두그두그두그");
-            OrderClear();
+            
             dish.check = false;
-            if (orderList.Count <= 2)
+            ordersheetCheck = false;
+            OrderClear();
+            if (orderList.Count < 2)
             {
                 RandomOrder();
             }
@@ -167,13 +168,12 @@ public class Orderlist : MonoBehaviour
                     order.transform.position = sheetPos.transform.position;
                 }
             }
-            check = true;
+            //check = true;
         }
     }
      
     public void OrderClear()
     {
-        
         if (completeDish == 1)
         {
             OrderSheet = sheet1;
@@ -185,11 +185,10 @@ public class Orderlist : MonoBehaviour
 
         for (int i = 0; i < orderList.Count; i++)
         {
-            
             if (orderList[i].tag == OrderSheet.tag)
             {
                 Destroy(setList[i].gameObject);
-                orderList.RemoveAt(i); 
+                orderList.RemoveAt(i);
 
                 break;
             }
@@ -197,6 +196,8 @@ public class Orderlist : MonoBehaviour
             {
                 numcheck++;
             }
+
+
         }
 
         for (int i = 0; i < orderList.Count; i++)
@@ -210,6 +211,7 @@ public class Orderlist : MonoBehaviour
 
         for (int i = 0; i < orderList.Count; i++)
         {
+            
             if (setList[i] == orderList[0])
             {
                 sheetPos = order1;
@@ -235,15 +237,18 @@ public class Orderlist : MonoBehaviour
                 sheetPos = order5;
                 setList[i].transform.position = sheetPos.transform.position;
             }
+            Debug.Log("움직임 확인 중");
         }
 
-        if (numcheck == orderList.Count)
+        if (numcheck > orderList.Count)
         {
             Debug.Log("뭐야 왜 주문 안한거 줌? 별점 1점 드립니다.");
+            Debug.Log("numcheck" + numcheck);
+            Debug.Log("orderList.Coun" + orderList.Count);
+
         }
 
         completeDish = 0;
-        numcheck = 0;
-        ordersheetCheck = false;
+        numcheck = 1;
     }
 }

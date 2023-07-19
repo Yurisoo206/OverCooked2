@@ -36,26 +36,43 @@ public class CompleteDish : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.up, out rayobject, 6f, layerMask))
         {
-            orderlist.check = true;
+            //orderlist.check = true;
 
             if (dish.tag == "SushiCook")
             {
+                Debug.Log("SushiCook" + dish.tag);
                 orderlist.completeDish = 1;
-                //score.score += 28;
+                check = true;
             }
             else if (dish.tag == "PrawnCook")
             {
+                Debug.Log("PrawnCook" + dish.tag);
                 orderlist.completeDish = 2;
-                //score.score += 30;
+                check = true;
             }
-            check = true;
             
+            
+        }
+
+        else if (dish.tag == "SushiCook")
+        {
+            Debug.Log("SushiCook" + dish.tag);
+            orderlist.completeDish = 1;
+            check = true;
+        }
+
+        else if (dish.tag == "PrawnCook")
+        {
+            Debug.Log("PrawnCook" + dish.tag);
+            orderlist.completeDish = 2;
+            check = true;
         }
 
         else
         {
-            Debug.Log("이건 마이너스");
+            score.score -= 30;
         }
+
         Debug.DrawRay(transform.position, transform.up * 6f, Color.black);
         player.isPlate = false;
         respawnPlate.respawnCheck = true;

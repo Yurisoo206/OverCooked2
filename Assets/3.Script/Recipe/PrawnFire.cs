@@ -73,6 +73,8 @@ public class PrawnFire : MonoBehaviour
             plateTag.layer = 9;
             plateTag.tag = "PrawnCook";
         }
+
+        
     }
 
     public void OnTriggerStay(Collider other)
@@ -120,5 +122,7 @@ public class PrawnFire : MonoBehaviour
             plateTag.layer = 9;
             plateTag.tag = "PrawnCook";
         }
+
+        
     }
 }

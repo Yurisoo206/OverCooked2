@@ -202,7 +202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032659101923412877}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13372b5d2204e834ca4b9dbb80c51adf, type: 3}
   m_Name: 
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032659101923412877}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7aed3fe8c4b8b8b40b1ad3efbd967dd8, type: 3}
   m_Name: 
@@ -587,7 +587,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1052150394275663748}
   - component: {fileID: 4096253771091088620}
-  - component: {fileID: 4506191853863795184}
   m_Layer: 5
   m_Name: Time (2)
   m_TagString: Untagged
@@ -667,22 +666,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4506191853863795184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4638625710130180341}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 530ca36981ae6bf41bb1c009d86f29eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: {fileID: 0}
-  orderlist: {fileID: 0}
-  timerDuration: 5
-  slider: []
 --- !u!1 &4668491936387501404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,7 +1051,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5773197790402190457}
   - component: {fileID: 4995102768602926062}
-  - component: {fileID: 6186360789019946924}
   m_Layer: 5
   m_Name: Time (1)
   m_TagString: Untagged
@@ -1148,22 +1130,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6186360789019946924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7028926107747633573}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 530ca36981ae6bf41bb1c009d86f29eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: {fileID: 0}
-  orderlist: {fileID: 0}
-  timerDuration: 5
-  slider: []
 --- !u!1 &7631342530722560162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,7 +1176,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9167321778569529882}
   - component: {fileID: 6870968699698115909}
-  - component: {fileID: 4056155621135399830}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
@@ -1290,19 +1255,3 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4056155621135399830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8321716276261745493}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 530ca36981ae6bf41bb1c009d86f29eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: {fileID: 0}
-  orderlist: {fileID: 0}
-  timerDuration: 5
-  slider: []

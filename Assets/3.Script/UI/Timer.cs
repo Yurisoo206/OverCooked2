@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    private Animator ani;
     public float LimitTime = 150f;
     public Text text_Timer;
 
     int min;
     float sec;
+
+    private void Start()
+    {
+        ani = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -43,6 +49,11 @@ public class Timer : MonoBehaviour
                 {
                     text_Timer.text = "00:" + (int)LimitTime;
                 }
+            }
+
+            if (LimitTime <= 30)
+            {
+                ani.SetTrigger("Timer");
             }
 
             if (LimitTime < 10f)
