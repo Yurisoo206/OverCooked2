@@ -68,6 +68,12 @@ public class Worktop : MonoBehaviour
         {
             mesh.material = mat[0];
             player.ischeck = false;
-        }  
+        }
+
+        if (other.CompareTag("Player") && player.isWorkTop != gameObject && player.ischeck)
+        {
+            mesh.material = mat[0];
+            player.ischeck = false;
+        }
     }
 }     

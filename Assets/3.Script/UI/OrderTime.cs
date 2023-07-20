@@ -7,7 +7,10 @@ public class OrderTime : MonoBehaviour
 {
     public Score score;
     public Orderlist orderlist;
-    private float timerDuration = 10; // 각 타이머의 지속 시간
+
+    public DishCoinUI dishCoinUI;
+
+    private float timerDuration = 15; // 각 타이머의 지속 시간
 
 
     public Slider[] slider = new Slider[3];
@@ -22,6 +25,7 @@ public class OrderTime : MonoBehaviour
        
         timerDuration = 10;
 
+        dishCoinUI = FindObjectOfType<DishCoinUI>();
         orderlist = FindObjectOfType<Orderlist>();
         score = FindObjectOfType<Score>();
         for (int i = 0; i < 3; i++)
@@ -59,7 +63,7 @@ public class OrderTime : MonoBehaviour
 
         if (num > 2)
         {
-            score.score -= 30;
+            score.tip = 0;
             //Debug.Log("코인" + score.score);
             //Debug.Log("타임오버로 사라집니다.");
             if (gameObject.transform.tag == "Prawn")
@@ -84,19 +88,25 @@ public class OrderTime : MonoBehaviour
     {
         if (num == 0)
         {
-            score.score += 28;
-            
+            score.score += 20;
+            score.tip++;
+            dishCoinUI.dishcoinActive = true;
+            //Debug.Log("팁 확인" + dishCoinUI.dishcoinActive);
         }
         else if (num == 1)
         {
-            score.score += 20;
-            //Debug.Log("점수플러스");
+            score.score += 15;
+            score.tip++;
+            score.score += score.tipCoin;
+            dishCoinUI.dishcoinActive = true;
+            //Debug.Log("팁 확인" + dishCoinUI.dishcoinActive);
         }
         else if (num == 2)
         {
-            score.score += 15;
-            //Debug.Log("점수플러스");
+            score.score += 10;
+            score.tip = 0;
         }
 
     }
 }
+ 

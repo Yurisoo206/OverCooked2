@@ -22,8 +22,11 @@ public class Fishbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && playerInput.isInteraction_space && !player.ishand)
+        if (other.CompareTag("Player") && playerInput.isInteraction_space && !player.ishand &&
+            player.isWorkTop2.name == gameObject.transform.GetComponentsInChildren<Transform>()[7].name)
         {
+            Debug.Log(player.isWorkTop2.name);
+            Debug.Log(gameObject.transform.GetComponentsInChildren<Transform>()[7]);
             player.ishand = true;
             ani.SetTrigger("Open");
             playerPos = other.GetComponentsInChildren<Transform>()[1].transform;
@@ -34,8 +37,11 @@ public class Fishbox : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && playerInput.isInteraction_space && !player.ishand)
+        if (other.CompareTag("Player") && playerInput.isInteraction_space && !player.ishand &&
+            player.isWorkTop2.name == gameObject.transform.GetComponentsInChildren<Transform>()[7].name)
         {
+            Debug.Log(player.isWorkTop2.name);
+            Debug.Log(gameObject.transform.GetComponentsInChildren<Transform>()[7]);
             player.ishand = true;
             ani.SetTrigger("Open");
             playerPos = other.GetComponentsInChildren<Transform>()[1].transform;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Orderlist : MonoBehaviour
 {
+    public Score score;
     public CompleteDish dish;
     public Transform respawn;
 
@@ -34,7 +35,6 @@ public class Orderlist : MonoBehaviour
 
     public int completeDish = 0;
 
-    //public bool check = false;
     public bool ordersheetCheck = false;
 
     private float time = 0f;
@@ -46,6 +46,7 @@ public class Orderlist : MonoBehaviour
 
     private void Start()
     {
+        score = FindObjectOfType<Score>();
         dish = FindObjectOfType<CompleteDish>();
         setList = new GameObject[5];
         sheet1 = sheet1_prefed;
@@ -82,16 +83,12 @@ public class Orderlist : MonoBehaviour
             dish.check = false;
             ordersheetCheck = false;
             OrderClear();
-            if (orderList.Count < 2)
+            if (orderList.Count <= 2)
             {
                 RandomOrder();
             }
-            
         }
-
     }
-
-    
 
     public void RandomSheet()
     {
@@ -135,40 +132,40 @@ public class Orderlist : MonoBehaviour
                 }
             }
 
-            for (int i = 0; i < orderList.Count; i++)
+            
+        }
+        for (int i = 0; i < orderList.Count; i++)
+        {
+            if (order == orderList[0])
             {
-                if (order == orderList[0])
-                {
-                    sheetPos = order1;
-                    order = setList[0];
-                    order.transform.position = sheetPos.transform.position;
-                }
-                else if (order == orderList[1])
-                {
-                    sheetPos = order2;
-                    order = setList[1];
-                    order.transform.position = sheetPos.transform.position;
-                }
-                else if (order == orderList[2])
-                {
-                    sheetPos = order3;
-                    order = setList[2];
-                    order.transform.position = sheetPos.transform.position;
-                }
-                else if (order == orderList[3])
-                {
-                    sheetPos = order4;
-                    order = setList[3];
-                    order.transform.position = sheetPos.transform.position;
-                }
-                else if (order == orderList[4])
-                {
-                    sheetPos = order5;
-                    order = setList[4];
-                    order.transform.position = sheetPos.transform.position;
-                }
+                sheetPos = order1;
+                order = setList[0];
+                order.transform.position = sheetPos.transform.position;
             }
-            //check = true;
+            else if (order == orderList[1])
+            {
+                sheetPos = order2;
+                order = setList[1];
+                order.transform.position = sheetPos.transform.position;
+            }
+            else if (order == orderList[2])
+            {
+                sheetPos = order3;
+                order = setList[2];
+                order.transform.position = sheetPos.transform.position;
+            }
+            else if (order == orderList[3])
+            {
+                sheetPos = order4;
+                order = setList[3];
+                order.transform.position = sheetPos.transform.position;
+            }
+            else if (order == orderList[4])
+            {
+                sheetPos = order5;
+                order = setList[4];
+                order.transform.position = sheetPos.transform.position;
+            }
         }
     }
      
@@ -196,8 +193,6 @@ public class Orderlist : MonoBehaviour
             {
                 numcheck++;
             }
-
-
         }
 
         for (int i = 0; i < orderList.Count; i++)
@@ -237,14 +232,13 @@ public class Orderlist : MonoBehaviour
                 sheetPos = order5;
                 setList[i].transform.position = sheetPos.transform.position;
             }
-            Debug.Log("움직임 확인 중");
+           
         }
 
         if (numcheck > orderList.Count)
         {
             Debug.Log("뭐야 왜 주문 안한거 줌? 별점 1점 드립니다.");
-            Debug.Log("numcheck" + numcheck);
-            Debug.Log("orderList.Coun" + orderList.Count);
+            score.tip = 0;
 
         }
 

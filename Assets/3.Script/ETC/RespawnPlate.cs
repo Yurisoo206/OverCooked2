@@ -4,54 +4,93 @@ using UnityEngine;
 
 public class RespawnPlate : MonoBehaviour
 {
+    public PlayerControll player;
+
     public GameObject respawn;
     public GameObject plate;
     public GameObject plate_prefed;
 
+
+    private GameObject workTop;
+    private GameObject plateGet;
+
     public GameObject[] posList;
-    GameObject[] setList;
 
     List<GameObject> orderList = new List<GameObject>();
     public bool respawnCheck = false;
 
 
     int num = 0;
+
     private void Start()
     {
-        setList = new GameObject[5];
+        player = FindObjectOfType<PlayerControll>();
+        workTop = gameObject.transform.GetComponentsInChildren<Transform>()[3].gameObject;
     }
 
     void Update()
     {
         if (respawnCheck && orderList.Count <=4)
         {
-
-            Respawn();
-            
+            StartCoroutine(Respawn_co());
         }
-        
     }
 
-    private void Respawn()
+    IEnumerator Respawn_co()
     {
         respawnCheck = false;
+        yield return new WaitForSecondsRealtime(3f);
+
         plate = Instantiate(plate_prefed, respawn.transform.position, respawn.transform.rotation);
         plate.transform.SetParent(gameObject.transform);
         orderList.Add(plate);
-        Debug.Log("접시 orderList.Count" + orderList.Count);
         num++;
-
-        Debug.Log("접시 num" + num);
 
         if (num == orderList.Count)
         {
             orderList[num - 1].transform.position = posList[num - 1].transform.position;
-
-            Debug.Log("orderlist" + orderList[num - 1].transform.position);
-            Debug.Log("posList" + posList[num - 1].transform.position + "위치" + posList[num - 1]);
-            
         }
-
-        
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && !player.ishand && workTop == player.isWorkTop2 && !player.ishand && Input.GetKeyDown(KeyCode.Space))
+        {
+
+            if (num >= 1)
+            {
+                plateGet = orderList[num - 1];
+                orderList[num - 1].transform.SetParent(null);
+
+                orderList.RemoveAt(num - 1);
+
+                player.isPlate = true;
+                plateGet.transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                plateGet.transform.SetParent(other.gameObject.transform);
+                num--;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && !player.ishand && workTop == player.isWorkTop2 && !player.ishand && Input.GetKeyDown(KeyCode.Space))
+        {
+
+            if (num >= 1)
+            {
+                plateGet = orderList[num - 1];
+                orderList[num - 1].transform.SetParent(null);
+
+                orderList.RemoveAt(num - 1);
+
+                player.isPlate = true;
+                plateGet.transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                plateGet.transform.SetParent(other.gameObject.transform);
+                num--;
+            }
+
+        }
+    }
+
 }

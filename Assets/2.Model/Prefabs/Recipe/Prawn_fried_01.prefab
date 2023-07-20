@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2800081388155658416}
   - component: {fileID: 223433220596337170}
   - component: {fileID: 2737202803186727984}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Prawn_fried_01
   m_TagString: Prawn
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 103419067734753338}
   - component: {fileID: 1033829382102259406}
   - component: {fileID: 3081688509264141774}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: m_ingredients_prawn_fried_01_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

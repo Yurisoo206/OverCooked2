@@ -51,7 +51,7 @@ public class Timer : MonoBehaviour
                 }
             }
 
-            if (LimitTime <= 30)
+            if (LimitTime <= 31)
             {
                 ani.SetTrigger("Timer");
             }

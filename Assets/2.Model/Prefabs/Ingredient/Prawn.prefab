@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 412516077746098322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Prawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5740650533469756709}
   - component: {fileID: 4963304967196592029}
   - component: {fileID: 4655998566484958188}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Prawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8023810007372118934}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ingriedients
   m_TagString: Untagged
   m_Icon: {fileID: 0}

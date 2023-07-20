@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 8636235217085795129}
   - component: {fileID: 4096299504354005405}
   - component: {fileID: 3320964897382825222}
-  - component: {fileID: 3558085352734302161}
   - component: {fileID: 8242823642416752728}
   m_Layer: 5
   m_Name: OtherPrawn
@@ -208,19 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderlist: {fileID: 0}
---- !u!114 &3558085352734302161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032659101923412877}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aed3fe8c4b8b8b40b1ad3efbd967dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: {fileID: 0}
 --- !u!114 &8242823642416752728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 0}
   orderlist: {fileID: 0}
-  timerDuration: 5
+  dishCoinUI: {fileID: 0}
   slider:
   - {fileID: 4096253771091088620}
   - {fileID: 4995102768602926062}

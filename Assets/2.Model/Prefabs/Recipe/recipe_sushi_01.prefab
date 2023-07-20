@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 625757455493148935}
   - component: {fileID: 5131657488569421152}
   - component: {fileID: 1949375796667212553}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: m_recipe_sushi_02_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4313859526270287499}
   - component: {fileID: 4313859526270287498}
   - component: {fileID: 3945587229595253151}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 4313859527394640086}
   - component: {fileID: 4313859527394640080}
   - component: {fileID: 4313859527394640087}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 8641772019824956144}
   - component: {fileID: 8981986839827302475}
   - component: {fileID: 1757012979405170816}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: recipe_sushi_01
   m_TagString: Sushi
   m_Icon: {fileID: 0}

@@ -15,6 +15,7 @@ public class PlayerControll : MonoBehaviour
     public bool getCook = false;
     public bool ishand = false;//손에 무언가 있는지 확인
     public bool cookend = false;//다지기 끝나고
+    public bool isCollision = false;//아무것도 접촉 안 할 때 알 기 위해
 
     public GameObject[] hand_Grip = new GameObject[2];
     public GameObject[] hand_Open = new GameObject[2];
@@ -114,6 +115,12 @@ public class PlayerControll : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("WorkTop"))
+        {
+            isCollision = true;
+            Debug.Log("인지중");
+
+        }
         if (other.CompareTag("ChppingBoard") && isCook)//다지기
         {
             cookware[0].SetActive(true);
@@ -131,6 +138,12 @@ public class PlayerControll : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("WorkTop"))
+        {
+            isCollision = true;
+            Debug.Log("인지중");
+        }
+
         if (other.CompareTag("ChppingBoard") && isCook)//다지기
         {
             cookware[0].SetActive(true);
@@ -153,6 +166,12 @@ public class PlayerControll : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("WorkTop"))
+        {
+            isCollision = false;
+            Debug.Log("인지 안 함");
+        }
+
         if (other.CompareTag("ChppingBoard") && !isCook)
         {
             ani.SetBool("Cook", false);

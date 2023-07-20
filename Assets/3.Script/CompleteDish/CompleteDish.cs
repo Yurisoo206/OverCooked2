@@ -36,8 +36,6 @@ public class CompleteDish : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.up, out rayobject, 6f, layerMask))
         {
-            //orderlist.check = true;
-
             if (dish.tag == "SushiCook")
             {
                 Debug.Log("SushiCook" + dish.tag);
@@ -56,21 +54,21 @@ public class CompleteDish : MonoBehaviour
 
         else if (dish.tag == "SushiCook")
         {
-            Debug.Log("SushiCook" + dish.tag);
+            //Debug.Log("SushiCook" + dish.tag);
             orderlist.completeDish = 1;
             check = true;
         }
 
         else if (dish.tag == "PrawnCook")
         {
-            Debug.Log("PrawnCook" + dish.tag);
+            //Debug.Log("PrawnCook" + dish.tag);
             orderlist.completeDish = 2;
             check = true;
         }
 
         else
         {
-            score.score -= 30;
+            score.tip = 0;
         }
 
         Debug.DrawRay(transform.position, transform.up * 6f, Color.black);
