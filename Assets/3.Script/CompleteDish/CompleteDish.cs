@@ -19,6 +19,7 @@ public class CompleteDish : MonoBehaviour
 
 
     public bool check = false;//주문 들어가게
+    public bool isCheckR = false;//인식 리지브바디 키지 않기 위해
 
 
     void Start()
@@ -83,6 +84,12 @@ public class CompleteDish : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("SushiCook") || other.CompareTag("PrawnCook") || other.CompareTag("Plate"))
+        {
+            Debug.Log("배달될 예정입니다");
+            isCheckR = true;
+        }
+
         if (other.CompareTag("SushiCook") && Input.GetKeyDown(KeyCode.Space) && player.isWorkTop2 == workTop)
         {
             dish = other.gameObject;
@@ -115,6 +122,12 @@ public class CompleteDish : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("SushiCook") || other.CompareTag("PrawnCook") || other.CompareTag("Plate"))
+        {
+            Debug.Log("배달될 예정입니다");
+            isCheckR = true;
+        }
+
         if (other.CompareTag("SushiCook") && Input.GetKeyDown(KeyCode.Space) && player.isWorkTop2 == workTop)
         {
             dish = other.gameObject;
@@ -143,6 +156,12 @@ public class CompleteDish : MonoBehaviour
 
             Check();
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("나간다");
+        isCheckR = false;
     }
 
 }

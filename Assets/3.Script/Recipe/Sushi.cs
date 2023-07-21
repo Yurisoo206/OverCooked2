@@ -8,6 +8,8 @@ public class Sushi : MonoBehaviour
 
     public bool isplate = false;
     public bool isCooking = false;//workTop 올리는 거
+    public bool isfall = false;//걍 바닥에 두는 용
+    public bool isfallCheck = false;//걍 바닥에 두는 용
 
     private GameObject workTopCheck;
     private GameObject plateTag;
@@ -19,6 +21,21 @@ public class Sushi : MonoBehaviour
     {
         player = FindObjectOfType<PlayerControll>();
         workTopCheck = GetComponent<GameObject>();
+    }
+
+    private void Update()
+    {
+        if (isfallCheck)
+        {
+            isfallCheck = false;
+        }
+        else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isCooking && !isplate)
+        {
+            Debug.Log("일단 true");
+            isfall = true;
+            gameObject.transform.SetParent(null);
+            gameObject.AddComponent<Rigidbody>();
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -42,30 +59,51 @@ public class Sushi : MonoBehaviour
             }
             
         }
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
-            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
-            !player.isPlate && !isplate
-            )
+
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.isPlate && !isplate && !isfall && !player.ishand )
         {
+            isfall = false;
+            isfallCheck = true;
+            Debug.Log("일단 false");
+
+            if (gameObject.transform.parent != null)
+            {
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)
+                {
+                    gameObject.transform.SetParent(null);
+                }
+            }
+
             check = false;
-            gameObject.transform.SetParent(null);
+
+            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.SetParent(other.gameObject.transform);
+
+            Destroy(GetComponent<Rigidbody>());
+        }
+
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
+        {
+            isfall = false;
+            Destroy(GetComponent<Rigidbody>());
+            check = false;
             transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.SetParent(other.gameObject.transform);
         }
 
-        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
+        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space) &&
+            player.isWorkTop2.name == other.gameObject.transform.GetComponentsInParent<Transform>()[1].name)
         {
-            //isplate = true;
+            isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
-            //this.gameObject.layer = 9;
-            //this.gameObject.tag = "Sushi";
             Debug.Log(gameObject.GetComponentsInParent<Transform>()[2].name);
             plateTag = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
             plateTag.layer = 9;
             plateTag.tag = "SushiCook";
+            Destroy(GetComponent<Rigidbody>());
         }
     }
 
@@ -79,6 +117,8 @@ public class Sushi : MonoBehaviour
             int childCount = parentTransform.childCount;
 
             preChildcount = childCount;
+
+            Debug.Log(preChildcount);
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
                 check = true;
@@ -90,30 +130,51 @@ public class Sushi : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
-            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && 
-            !player.isPlate && !isplate            
-            )
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.isPlate && !isplate && !isfall && !player.ishand)
         {
+            isfall = false;
+            isfallCheck = true;
+            Debug.Log("일단 false");
+
+            if (gameObject.transform.parent != null)
+            {
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)
+                {
+                    gameObject.transform.SetParent(null);
+                }
+            }
+            
             check = false;
-            gameObject.transform.SetParent(null);
+           
+            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.SetParent(other.gameObject.transform);
+
+            Destroy(GetComponent<Rigidbody>());
+        }
+
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
+        {
+            isfall = false;
+            Destroy(GetComponent<Rigidbody>());
+            check = false;
             transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.SetParent(other.gameObject.transform);
         }
 
 
-        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
+        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space) &&
+            player.isWorkTop2.name == other.gameObject.transform.GetComponentsInParent<Transform>()[1].name)
         {
             isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
-
             Debug.Log(gameObject.GetComponentsInParent<Transform>()[2].name);
             plateTag = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
             plateTag.layer = 9;
             plateTag.tag = "SushiCook";
+            Destroy(GetComponent<Rigidbody>());
         }
     }
 

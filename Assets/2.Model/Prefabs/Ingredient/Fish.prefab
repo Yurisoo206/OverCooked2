@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 1380396806740395334}
   - component: {fileID: 4095155406128053499}
   - component: {fileID: 3291895946791278135}
-  - component: {fileID: 4598677550707900808}
   m_Layer: 7
   m_Name: Fish
   m_TagString: Untagged
@@ -91,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2690890ad3d5e4891899856bbf0d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rd: {fileID: 0}
   player: {fileID: 0}
   sushi_prefed: {fileID: 8981986839827302474, guid: bd2362ae2b4e0fd47bd1c6e8af0539a8, type: 3}
   sushi: {fileID: 0}
@@ -98,22 +98,6 @@ MonoBehaviour:
   isCooking: 0
   isCook: 0
   isfall: 0
---- !u!54 &4598677550707900808
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757520106346782716}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &4079501840393839167
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class PrawnFire : MonoBehaviour
 
     public bool isplate = false;
     public bool isCooking = false;//workTop ¿Ã¸®´Â °Å
+    public bool isfall = false;//°Á ¹Ù´Ú¿¡ µÎ´Â ¿ë
 
     public GameObject UI_Prefad;
     private GameObject UI;
@@ -27,7 +28,14 @@ public class PrawnFire : MonoBehaviour
 
     private void Update()
     {
-        //UI.transform.position = transform.position;
+        if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && gameObject != isfall)
+        {
+            Debug.Log(player.cookend);
+            isfall = true;
+            Debug.Log("¶³±Å");
+            gameObject.transform.SetParent(null);
+            gameObject.AddComponent<Rigidbody>();
+        }
     }
 
     public void OnTriggerEnter(Collider other)

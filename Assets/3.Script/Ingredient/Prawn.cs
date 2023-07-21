@@ -12,6 +12,8 @@ public class Prawn : MonoBehaviour
     public bool isplate = false;
     public bool isCooking = false;//workTop 올리는 거
     public bool isCook = false;//다지는 중인거
+    public bool isfall = false;//걍 바닥에 두는 용
+    public bool isfallCheck = false;
 
     private GameObject workTopCheck;
 
@@ -22,6 +24,30 @@ public class Prawn : MonoBehaviour
     {
         player = FindObjectOfType<PlayerControll>();
         workTopCheck = GetComponent<GameObject>();
+    }
+
+    private void Update()
+    {
+        if (isfallCheck)
+        {
+            isfallCheck = false;
+        }
+        else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isCooking)
+        {
+            Debug.Log("일단 true");
+            isfall = true;
+            gameObject.transform.SetParent(null);
+            gameObject.AddComponent<Rigidbody>();
+        }
+        //else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.E) && !player.isCollision && !isfall && !isfallCheck && !isCooking)//던지기
+        //{
+        //    if (!isfall)
+        //    {
+        //        isfall = true;
+        //        gameObject.transform.SetParent(null);
+        //        gameObject.AddComponent<Rigidbody>();
+        //    }
+        //}
     }
 
     public void OnTriggerEnter(Collider other)
@@ -46,14 +72,25 @@ public class Prawn : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
-            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !player.ishand
-            )
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isCooking)
         {
+            isfall = false;
+            isfallCheck = true;
+            Debug.Log("일단 false");
+
+            if (gameObject.transform.parent != null)
+            {
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
+                {
+                    Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
+                    gameObject.transform.SetParent(null);
+                }
+            }
             check = false;
-            gameObject.transform.SetParent(null);
             transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.SetParent(other.gameObject.transform);
+
+            Destroy(GetComponent<Rigidbody>());
         }
     }
 
@@ -77,25 +114,48 @@ public class Prawn : MonoBehaviour
                 isCooking = true;
             }
         }
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
-            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !player.ishand
-            )
+
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isCooking)
         {
+            isfall = false;
+            isfallCheck = true;
+
+            if (gameObject.transform.parent != null)
+            {
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
+                {
+                    Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
+                    gameObject.transform.SetParent(null);
+
+                }
+            }
             check = false;
-            gameObject.transform.SetParent(null);
-            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.SetParent(other.gameObject.transform);
+            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.rotation = other.GetComponentsInChildren<Transform>()[1].transform.rotation;
+
+            Destroy(GetComponent<Rigidbody>());
+
+        }
+        if (other.CompareTag("Player") && player.cookend && !isfall)//다지기 끝
+        {
+            if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)// 이렇게 if문을 한 번 빼준 이유는 바닥에 있을때 오류 방지를 하기 위해서
+            {
+                player.cookend = false;
+                prawnFire = Instantiate(prawn_prefed, gameObject.transform.position, gameObject.transform.rotation);
+                prawnFire.transform.SetParent(gameObject.GetComponentsInParent<Transform>()[1].transform);
+                Destroy(gameObject);
+            }
         }
 
-        if (other.CompareTag("Player") &&
-            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
-            player.cookend
-            )//다지기
+        if (other.CompareTag("Player") && player.isCook && !isfall)//다지기 중
         {
-            player.cookend = false;
-            prawnFire = Instantiate(prawn_prefed, gameObject.transform.position, gameObject.transform.rotation);
-            prawnFire.transform.SetParent(gameObject.GetComponentsInParent<Transform>()[1].transform);
-            Destroy(gameObject);
+            if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)
+            {
+                //Debug.Log("파티클 실행할 예정");
+                gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            }
+
         }
 
         if (other.CompareTag("ChppingBoard") && !isCooking)
