@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class Shutter : MonoBehaviour
 {
-    Vector3 target = new Vector3(0, 0.001f, 0);
+    private Animator ani;
+    private bool start = false;
+
+
+    void Start()
+    {
+        ani = GetComponent<Animator>();
+        start = false;
+    }
+
+
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, 0.5f);
+        if (!start && Input.GetKeyDown(KeyCode.Space))
+        {
+            ani.SetTrigger("Start");
+            start = true;
+        }
     }
 }
 
