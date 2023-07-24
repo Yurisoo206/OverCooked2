@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    public GameControll gameControll;
     private Animator ani;
     public float LimitTime = 150f;
     public Text text_Timer;
@@ -15,53 +16,62 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         ani = GetComponent<Animator>();
+        gameControll = FindObjectOfType<GameControll>();
     }
 
     void Update()
     {
-        if (LimitTime >= 0)
+        if (gameControll.isStart)
         {
-            LimitTime -= Time.deltaTime;
-            if (LimitTime >= 60f)
+            if (LimitTime >= 0)
             {
-                min = (int)LimitTime / 60;
-                sec = LimitTime % 60;
-                if (sec >= 10)
+                LimitTime -= Time.deltaTime;
+                if (LimitTime >= 60f)
                 {
-                    text_Timer.text = "0" + min + ":" + (int)sec;
+                    min = (int)LimitTime / 60;
+                    sec = LimitTime % 60;
+                    if (sec >= 10)
+                    {
+                        text_Timer.text = "0" + min + ":" + (int)sec;
+                    }
+
+                    if (sec < 10)
+                    {
+                        text_Timer.text = "0" + min + ":0" + (int)sec;
+                    }
+
                 }
 
-                if (sec < 10)
+                if (LimitTime < 60f)
                 {
-                    text_Timer.text = "0" + min + ":0" + (int)sec;
+                    if (sec >= 10)
+                    {
+                        text_Timer.text = "00:" + (int)LimitTime;
+                    }
+
+                    if (sec < 10)
+                    {
+                        text_Timer.text = "00:" + (int)LimitTime;
+                    }
                 }
 
-            }
-
-            if (LimitTime < 60f)
-            {
-                if (sec >= 10)
+                if (LimitTime <= 31 && LimitTime > 10)
                 {
-                    text_Timer.text = "00:" + (int)LimitTime;
+                    ani.SetBool("Time", true);
                 }
 
-                if (sec < 10)
+                if (LimitTime < 10f)
                 {
-                    text_Timer.text = "00:" + (int)LimitTime;
+                    text_Timer.text = "00:0" + (int)LimitTime;
+                }
+
+                if (LimitTime <= 0)
+                {
+                    ani.SetBool("Time", false);
                 }
             }
-
-            if (LimitTime <= 31)
-            {
-                ani.SetTrigger("Timer");
-            }
-
-            if (LimitTime < 10f)
-            {
-                text_Timer.text = "00:0" + (int)LimitTime;
-            }
-
         }
+        
         
     }
 }

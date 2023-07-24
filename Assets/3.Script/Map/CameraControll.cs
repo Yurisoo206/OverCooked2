@@ -1,19 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraControll : MonoBehaviour
 {
-    public Transform player;
-    Vector3 rotation = new Vector3(30f, -2.618f, -0.006f);
+    public CinemachineVirtualCamera playerCamera;
+    public CinemachineVirtualCamera level1_Camera;
+
+    bool isMove = false;
 
 
-
-
-    // Update is called once per frame
-    void LateUpdate()
+    private void Update()
     {
-        transform.position = new Vector3(player.position.x, player.position.y + 10f, player.position.z - 5f);
-        //transform.rotation = Quaternion.Euler(rotation);
+        if (!isMove)
+        {
+            Invoke("level1_Move", 0.5f);
+            isMove = false;
+        }
+    }
+
+    private void level1_Move()
+    {
+        playerCamera.enabled = false;
+        level1_Camera.enabled = true;
+        Invoke("normalPos",2f);
+    }
+
+    private void normalPos()
+    {
+        playerCamera.enabled = true;
+        level1_Camera.enabled = false;
     }
 }

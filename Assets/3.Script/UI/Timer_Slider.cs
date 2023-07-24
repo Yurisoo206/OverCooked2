@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Timer_Slider : MonoBehaviour
 {
+    public GameControll gameControll;
     public Slider sliderTime;
     public Image fill;
     public float LimitTime = 150f;
@@ -13,6 +14,7 @@ public class Timer_Slider : MonoBehaviour
     Color _Orange;
     private void Start()
     {
+        gameControll = FindObjectOfType<GameControll>();
         _Red = new Color(1,0,0,1);
         _Orange = new Color(1,0.6f,0,1);
         sliderTime = GetComponent<Slider>();
@@ -21,19 +23,23 @@ public class Timer_Slider : MonoBehaviour
     }
     void Update()
     {
-        LimitTime -= Time.deltaTime;
-        if (sliderTime.value > 0.0f)
+        if (gameControll.isStart)
         {
-            sliderTime.value -= Time.deltaTime;
+            LimitTime -= Time.deltaTime;
+            if (sliderTime.value > 0.0f)
+            {
+                sliderTime.value -= Time.deltaTime;
 
+            }
+            if (sliderTime.value <= 80f)
+            {
+                fill.color = _Orange;
+            }
+            if (sliderTime.value <= 30f)
+            {
+                fill.color = _Red;
+            }
         }
-        if (sliderTime.value <= 80f)
-        {
-            fill.color = _Orange;
-        }
-        if (sliderTime.value <= 30f)
-        {
-            fill.color = _Red;
-        }
+        
     }
 }

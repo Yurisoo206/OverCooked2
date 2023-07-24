@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class MapProduce : MonoBehaviour
 {
+    public GameManager gameManager;
     private Animator ani;
-    public bool moveTrue = true;
+    public bool ismove = false;
 
     void Start()
     {
-        moveTrue = true;
+        gameManager = FindObjectOfType<GameManager>();
+
         ani = GetComponent<Animator>();
-        Invoke("MapLevel_1", 1f);
+        if (!gameManager.level1_Check)
+        {
+            Invoke("MapLevel_1", 1.5f);
+        }
     }
 
     void MapLevel_1()
     {
-        
         ani.SetTrigger("Map1");
         Invoke("MoveTrue", 3f);
-        Debug.Log("작동확인");
     }
 
     void MoveTrue()
     {
-        moveTrue = false;
+        ismove = true;
     }
     
 }

@@ -39,15 +39,6 @@ public class Prawn : MonoBehaviour
             gameObject.transform.SetParent(null);
             gameObject.AddComponent<Rigidbody>();
         }
-        //else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.E) && !player.isCollision && !isfall && !isfallCheck && !isCooking)//던지기
-        //{
-        //    if (!isfall)
-        //    {
-        //        isfall = true;
-        //        gameObject.transform.SetParent(null);
-        //        gameObject.AddComponent<Rigidbody>();
-        //    }
-        //}
     }
 
     public void OnTriggerEnter(Collider other)
@@ -161,6 +152,16 @@ public class Prawn : MonoBehaviour
         if (other.CompareTag("ChppingBoard") && !isCooking)
         {
             isCooking = true;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+
+        if (other.CompareTag("Player") && !player.isCook)
+        {
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            //Debug.Log("파티클 끌 예정");
         }
     }
 }

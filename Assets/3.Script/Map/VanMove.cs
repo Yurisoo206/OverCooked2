@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class VanMove : MonoBehaviour
 {
+    [HideInInspector] public MapProduce mapProduce;
+    public GameManager gameManager;
+
     public float inputX { get; private set; }
     public float inputZ { get; private set; }
-    public bool isInteraction_space { get; private set; }
 
-    [HideInInspector] public MapProduce mapProduce;
     float speed = 5;
     void Start()
     {
-        
+        gameManager = FindObjectOfType<GameManager>();
         mapProduce = FindObjectOfType<MapProduce>();
+        if (gameManager.gameCheck)
+        {
+            transform.position 
+            = new Vector3(gameManager.savePos.position.x, gameManager.savePos.position.y, gameManager.savePos.position.z);
+        }
     }
 
     void Update()
     {
         inputX = Input.GetAxis("Horizontal");
         inputZ = Input.GetAxis("Vertical");
-
-        isInteraction_space = Input.GetKeyDown(KeyCode.Space);
-        if ((inputX != 0 || inputZ != 0))
+        if ((inputX != 0 || inputZ != 0) && mapProduce.ismove)
         {
-            Debug.Log("왜 안되는겨");
             Vector3 velocity = new Vector3(inputX, 0, inputZ).normalized;
             transform.position += velocity * speed * Time.deltaTime;
             transform.LookAt(transform.position + velocity);

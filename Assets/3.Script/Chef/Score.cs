@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     public Orderlist orderlist;
+    public GameManager gameManager;
+    public GameControll gameover;
 
     public Animator ani;
 
@@ -20,6 +22,8 @@ public class Score : MonoBehaviour
 
     void Start()
     {
+        gameover = FindObjectOfType<GameControll>();
+        gameManager = FindObjectOfType<GameManager>();
         orderlist = FindObjectOfType<Orderlist>();
         ani = GetComponent<Animator>();
     }
@@ -41,6 +45,22 @@ public class Score : MonoBehaviour
             tipCoin = tip * 8;
             ani.SetTrigger("Coin");
             //Debug.Log("Á¡¼ö »ó½Â");
+        }
+
+        if (gameover.isEnd)
+        {
+            if (60 > score && score >= 20)
+            {
+                gameManager.level1_star = 1;
+            }
+            if (240 > score && score >= 60)
+            {
+                gameManager.level1_star = 2;
+            }
+            if (60 > score && score >= 20)
+            {
+                gameManager.level1_star = 3;
+            }
         }
     }
 

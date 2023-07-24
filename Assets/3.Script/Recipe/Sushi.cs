@@ -9,7 +9,7 @@ public class Sushi : MonoBehaviour
     public bool isplate = false;
     public bool isCooking = false;//workTop ¿Ã¸®´Â °Å
     public bool isfall = false;//°Á ¹Ù´Ú¿¡ µÎ´Â ¿ë
-    public bool isfallCheck = false;//°Á ¹Ù´Ú¿¡ µÎ´Â ¿ë
+    public bool isfallCheck = false;//
 
     private GameObject workTopCheck;
     private GameObject plateTag;

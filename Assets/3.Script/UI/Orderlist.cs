@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Orderlist : MonoBehaviour
 {
+    public GameControll gameControll;
+
     public Score score;
     public CompleteDish dish;
     public Transform respawn;
@@ -46,6 +48,7 @@ public class Orderlist : MonoBehaviour
 
     private void Start()
     {
+        gameControll = FindObjectOfType<GameControll>();
         score = FindObjectOfType<Score>();
         dish = FindObjectOfType<CompleteDish>();
         setList = new GameObject[5];
@@ -55,39 +58,43 @@ public class Orderlist : MonoBehaviour
 
     void Update()
     {
-        StartOrder();
-        if (time < 150f)
+        if (gameControll.isStart)
         {
-            time += Time.deltaTime;
-            if ((int)time%20 == 1 && timecheck)
+            StartOrder();
+            if (time < 150f)
             {
+                time += Time.deltaTime;
+                if ((int)time % 20 == 1 && timecheck)
+                {
 
-                RandomOrder();
-                timecheck = false;
+                    RandomOrder();
+                    timecheck = false;
+                }
+
+
+                if ((int)time % 10 == 2 && !timecheck)
+                {
+                    timecheck = transform;
+                }
             }
 
-
-            if ((int)time % 10 == 2 && !timecheck)
-            {
-                timecheck = transform;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            RandomOrder();
-        }
-        if (dish.check || ordersheetCheck)
-        {
-            
-            dish.check = false;
-            ordersheetCheck = false;
-            OrderClear();
-            if (orderList.Count <= 2)
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 RandomOrder();
             }
+            if (dish.check || ordersheetCheck)
+            {
+
+                dish.check = false;
+                ordersheetCheck = false;
+                OrderClear();
+                if (orderList.Count <= 2)
+                {
+                    RandomOrder();
+                }
+            }
         }
+        
     }
 
     public void RandomSheet()
@@ -131,8 +138,6 @@ public class Orderlist : MonoBehaviour
                     break;
                 }
             }
-
-            
         }
         for (int i = 0; i < orderList.Count; i++)
         {

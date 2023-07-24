@@ -15,13 +15,16 @@ public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     Image buttonImage;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
     
 
     private void Start()
     {
         buttonImage = btn.transform.GetComponent<Image>(); // 버튼의 Image 컴포넌트 가져오기
         ani = GetComponent<Animator>();
-
+        audioSource = GetComponent<AudioSource>();
+        audioClip = GetComponent<AudioClip>();
     }
 
 
@@ -30,6 +33,7 @@ public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         buttonImage.sprite = hoverSprite; // 버튼 이미지 변경
         ani.SetTrigger("Button");
         transform.GetChild(0).gameObject.SetActive(true);
+        audioSource.Play();
  
     }
 

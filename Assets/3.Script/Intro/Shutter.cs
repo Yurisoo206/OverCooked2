@@ -6,10 +6,12 @@ public class Shutter : MonoBehaviour
 {
     private Animator ani;
     private bool start = false;
+    public AudioSource audioSource;
 
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         ani = GetComponent<Animator>();
         start = false;
     }
@@ -19,6 +21,7 @@ public class Shutter : MonoBehaviour
     {
         if (!start && Input.GetKeyDown(KeyCode.Space))
         {
+            audioSource.Play();
             ani.SetTrigger("Start");
             start = true;
         }

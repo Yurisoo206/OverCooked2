@@ -88,14 +88,14 @@ public class OrderTime : MonoBehaviour
     {
         if (num == 0)
         {
-            score.score += 20;
+            score.score += 50;
             score.tip++;
             dishCoinUI.dishcoinActive = true;
             //Debug.Log("∆¡ »Æ¿Œ" + dishCoinUI.dishcoinActive);
         }
         else if (num == 1)
         {
-            score.score += 15;
+            score.score += 30;
             score.tip++;
             score.score += score.tipCoin;
             dishCoinUI.dishcoinActive = true;
@@ -103,7 +103,7 @@ public class OrderTime : MonoBehaviour
         }
         else if (num == 2)
         {
-            score.score += 10;
+            score.score += 20;
             score.tip = 0;
         }
 

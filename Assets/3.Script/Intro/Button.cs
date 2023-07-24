@@ -16,9 +16,11 @@ public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Animator ani;
 
     Image buttonImage;
+    public AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         buttonImage = GetComponent<Image>(); // 버튼의 Image 컴포넌트 가져오기
         sheet = gameObject.transform.parent.gameObject;
         ani = GetComponent<Animator>();
@@ -29,13 +31,12 @@ public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         buttonImage.sprite = hoverSprite; // 버튼 이미지 변경
         text.color = Color.white;
-        //ani.SetTrigger("Button");
+        audioSource.Play();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         buttonImage.sprite = normalSprite; // 버튼 이미지 원래대로 복원
         text.color = new Color(0.3372549f, 0.5843138f, 0.6705883f, 1f);
-        //sheet.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

@@ -16,6 +16,7 @@ public class PlayerControll : MonoBehaviour
     public bool ishand = false;//손에 무언가 있는지 확인
     public bool cookend = false;//다지기 끝나고
     public bool isCollision = false;//아무것도 접촉 안 할 때 알 기 위해
+    public bool isfall = false;//바닥에 떨어진 재료 하나만 인식
 
     public GameObject[] hand_Grip = new GameObject[2];
     public GameObject[] hand_Open = new GameObject[2];

@@ -9,6 +9,7 @@ public class PrawnFire : MonoBehaviour
     public bool isplate = false;
     public bool isCooking = false;//workTop ¿Ã¸®´Â °Å
     public bool isfall = false;//°Á ¹Ù´Ú¿¡ µÎ´Â ¿ë
+    public bool isfallCheck = false;//
 
     public GameObject UI_Prefad;
     private GameObject UI;
@@ -28,11 +29,14 @@ public class PrawnFire : MonoBehaviour
 
     private void Update()
     {
-        if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && gameObject != isfall)
+        if (isfallCheck)
         {
-            Debug.Log(player.cookend);
+            isfallCheck = false;
+        }
+        else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isCooking && !isplate)
+        {
+            Debug.Log("ÀÏ´Ü true");
             isfall = true;
-            Debug.Log("¶³±Å");
             gameObject.transform.SetParent(null);
             gameObject.AddComponent<Rigidbody>();
         }
@@ -58,31 +62,53 @@ public class PrawnFire : MonoBehaviour
             }
 
         }
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
-            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
-            !player.isPlate && !isplate
-            )
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.isPlate && !isplate && !isfall && !player.ishand)
         {
+            isfall = false;
+            isfallCheck = true;
+            Debug.Log("ÀÏ´Ü false");
+
+            if (gameObject.transform.parent != null)
+            {
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)
+                {
+                    gameObject.transform.SetParent(null);
+                }
+            }
+
             check = false;
-            gameObject.transform.SetParent(null);
+
+            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.SetParent(other.gameObject.transform);
+
+            Destroy(GetComponent<Rigidbody>());
+        }
+
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
+        {
+            isfall = false;
+            Destroy(GetComponent<Rigidbody>());
+            check = false;
             transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.SetParent(other.gameObject.transform);
         }
 
-        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
+        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space) &&
+            player.isWorkTop2.name == other.gameObject.transform.GetComponentsInParent<Transform>()[1].name)
         {
-            //isplate = true;
+            isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
-
+            Debug.Log(gameObject.GetComponentsInParent<Transform>()[2].name);
             plateTag = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
             plateTag.layer = 9;
-            plateTag.tag = "PrawnCook";
+            plateTag.tag = "SushiCook";
+            Destroy(GetComponent<Rigidbody>());
         }
 
-        
+
     }
 
     public void OnTriggerStay(Collider other)
@@ -106,31 +132,50 @@ public class PrawnFire : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) &&
-            player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name &&
-            !player.isPlate && !isplate
-
-            )
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.isPlate && !isplate && !isfall && !player.ishand)
         {
+            isfall = false;
+            isfallCheck = true;
+            Debug.Log("ÀÏ´Ü false");
+
+            if (gameObject.transform.parent != null)
+            {
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)
+                {
+                    gameObject.transform.SetParent(null);
+                }
+            }
+
             check = false;
-            gameObject.transform.SetParent(null);
+
+            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+            transform.SetParent(other.gameObject.transform);
+
+            Destroy(GetComponent<Rigidbody>());
+        }
+
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
+        {
+            isfall = false;
+            Destroy(GetComponent<Rigidbody>());
+            check = false;
             transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.SetParent(other.gameObject.transform);
         }
 
-        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space))
+        if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space) &&
+            player.isWorkTop2.name == other.gameObject.transform.GetComponentsInParent<Transform>()[1].name)
         {
             isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
-
+            Debug.Log(gameObject.GetComponentsInParent<Transform>()[2].name);
             plateTag = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
             plateTag.layer = 9;
             plateTag.tag = "PrawnCook";
+            Destroy(GetComponent<Rigidbody>());
         }
-
-        
     }
 }
