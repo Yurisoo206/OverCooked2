@@ -60,26 +60,31 @@ public class Sushi : MonoBehaviour
             
         }
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.isPlate && !isplate && !isfall && !player.ishand )
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand)
         {
             isfall = false;
             isfallCheck = true;
-            Debug.Log("일단 false");
+
+            Destroy(GetComponent<Rigidbody>());
 
             if (gameObject.transform.parent != null)
             {
-                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
                 {
+                    isCooking = false;
+                    Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
                     gameObject.transform.SetParent(null);
+
                 }
             }
+            else if (gameObject.transform.parent == null)
+            {
+                isCooking = false;
+                check = false;
+                transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                transform.SetParent(other.gameObject.transform);
+            }
 
-            check = false;
-
-            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
-            transform.SetParent(other.gameObject.transform);
-
-            Destroy(GetComponent<Rigidbody>());
         }
 
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
@@ -130,26 +135,31 @@ public class Sushi : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.isPlate && !isplate && !isfall && !player.ishand)
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand)
         {
             isfall = false;
             isfallCheck = true;
-            Debug.Log("일단 false");
+
+            Destroy(GetComponent<Rigidbody>());
 
             if (gameObject.transform.parent != null)
             {
-                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
                 {
+                    isCooking = false;
+                    Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
                     gameObject.transform.SetParent(null);
+
                 }
             }
-            
-            check = false;
-           
-            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
-            transform.SetParent(other.gameObject.transform);
+            else if (gameObject.transform.parent == null)
+            {
+                isCooking = false;
+                check = false;
+                transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                transform.SetParent(other.gameObject.transform);
+            }
 
-            Destroy(GetComponent<Rigidbody>());
         }
 
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)

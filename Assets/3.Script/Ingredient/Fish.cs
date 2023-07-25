@@ -48,7 +48,7 @@ public class Fish : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space) && !check )
+        if (other.CompareTag("WorkTop") && Input.GetKeyDown(KeyCode.Space) && !check)
         {
             workTopCheck = other.gameObject;
             
@@ -70,26 +70,30 @@ public class Fish : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isCooking)
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand )
         {
             isfall = false;
             isfallCheck = true;
-            Debug.Log("일단 false");
+
+            Destroy(GetComponent<Rigidbody>());
 
             if (gameObject.transform.parent != null)
             {
-                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall && isCook)
                 {
+                    isCooking = false;
                     Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
                     gameObject.transform.SetParent(null);
 
                 }
             }
-            check = false;
-            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
-            transform.SetParent(other.gameObject.transform);
-
-            Destroy(GetComponent<Rigidbody>());
+            else if (gameObject.transform.parent == null)
+            {
+                isCooking = false;
+                check = false;
+                transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                transform.SetParent(other.gameObject.transform);
+            }
 
         }
     }
@@ -115,27 +119,29 @@ public class Fish : MonoBehaviour
                 isCooking = true;
             }
         }
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isCooking)
+
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand)
         {
             isfall = false;
             isfallCheck = true;
-            Debug.Log("일단 false");
-            
-            if (gameObject.transform.parent != null)
-            {
-                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
-                {
-                    Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
-                    gameObject.transform.SetParent(null);
-
-                }
-            }
-            check = false;
-            transform.SetParent(other.gameObject.transform);
-            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
-            transform.rotation = other.GetComponentsInChildren<Transform>()[1].transform.rotation;
 
             Destroy(GetComponent<Rigidbody>());
+
+            if (gameObject.transform.parent != null)
+            {
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall && !isCook)
+                {
+                    isCooking = false;
+                    gameObject.transform.SetParent(null);
+                }
+            }
+            else if (gameObject.transform.parent == null)
+            {
+                isCooking = false;
+                check = false;
+                transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                transform.SetParent(other.gameObject.transform);
+            }
 
         }
 
@@ -156,11 +162,12 @@ public class Fish : MonoBehaviour
             {
                 //Debug.Log("파티클 실행할 예정");
                 gameObject.transform.GetChild(1).gameObject.SetActive(true);
+                isCook = true;
             }
             
         }
 
-        if (other.CompareTag("ChppingBoard") && !isCooking)
+        if (other.CompareTag("ChppingBoard") && !isCooking )
         {
             isCooking = true;
         }

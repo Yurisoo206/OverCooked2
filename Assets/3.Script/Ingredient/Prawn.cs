@@ -34,7 +34,6 @@ public class Prawn : MonoBehaviour
         }
         else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isCooking)
         {
-            Debug.Log("일단 true");
             isfall = true;
             gameObject.transform.SetParent(null);
             gameObject.AddComponent<Rigidbody>();
@@ -63,25 +62,31 @@ public class Prawn : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isCooking)
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand)
         {
             isfall = false;
             isfallCheck = true;
-            Debug.Log("일단 false");
+
+            Destroy(GetComponent<Rigidbody>());
 
             if (gameObject.transform.parent != null)
             {
                 if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
                 {
+                    isCooking = false;
                     Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
                     gameObject.transform.SetParent(null);
+
                 }
             }
-            check = false;
-            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
-            transform.SetParent(other.gameObject.transform);
+            else if (gameObject.transform.parent == null)
+            {
+                isCooking = false;
+                check = false;
+                transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                transform.SetParent(other.gameObject.transform);
+            }
 
-            Destroy(GetComponent<Rigidbody>());
         }
     }
 
@@ -106,28 +111,31 @@ public class Prawn : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isCooking)
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand)
         {
             isfall = false;
             isfallCheck = true;
 
-            if (gameObject.transform.parent != null)
-            {
-                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
-                {
-                    Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
-                    gameObject.transform.SetParent(null);
-
-                }
-            }
-            check = false;
-            transform.SetParent(other.gameObject.transform);
-            transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
-            transform.rotation = other.GetComponentsInChildren<Transform>()[1].transform.rotation;
-
             Destroy(GetComponent<Rigidbody>());
 
+            if (gameObject.transform.parent != null)
+            {
+                if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall && !isCook)
+                {
+                    isCooking = false;
+                    gameObject.transform.SetParent(null);
+                }
+            }
+            else if (gameObject.transform.parent == null)
+            {
+                isCooking = false;
+                check = false;
+                transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                transform.SetParent(other.gameObject.transform);
+            }
+
         }
+
         if (other.CompareTag("Player") && player.cookend && !isfall)//다지기 끝
         {
             if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)// 이렇게 if문을 한 번 빼준 이유는 바닥에 있을때 오류 방지를 하기 위해서
@@ -145,6 +153,7 @@ public class Prawn : MonoBehaviour
             {
                 //Debug.Log("파티클 실행할 예정");
                 gameObject.transform.GetChild(1).gameObject.SetActive(true);
+                isCook = true;
             }
 
         }

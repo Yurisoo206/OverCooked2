@@ -14,9 +14,24 @@ public class GameManager : MonoBehaviour
 
     public Transform savePos ;
 
+    public static GameManager Instance = null;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
-        
         totalStar = level1_star;
     }
 

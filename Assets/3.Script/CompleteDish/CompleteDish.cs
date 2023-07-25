@@ -86,7 +86,6 @@ public class CompleteDish : MonoBehaviour
     {
         if (other.CompareTag("SushiCook") || other.CompareTag("PrawnCook") || other.CompareTag("Plate"))
         {
-            Debug.Log("배달될 예정입니다");
             isCheckR = true;
         }
 
@@ -124,7 +123,6 @@ public class CompleteDish : MonoBehaviour
     {
         if (other.CompareTag("SushiCook") || other.CompareTag("PrawnCook") || other.CompareTag("Plate"))
         {
-            Debug.Log("배달될 예정입니다");
             isCheckR = true;
         }
 
@@ -160,7 +158,6 @@ public class CompleteDish : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("나간다");
         isCheckR = false;
     }
 

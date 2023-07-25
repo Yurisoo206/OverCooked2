@@ -13,7 +13,7 @@ public class CameraControll : MonoBehaviour
 
     private void Update()
     {
-        if (!isMove)
+        if (!isMove && !GameManager.Instance.level1_Check)
         {
             Invoke("level1_Move", 0.5f);
             isMove = false;

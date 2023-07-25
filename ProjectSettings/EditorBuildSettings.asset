@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/1.Scene/Intro.unity
     guid: f5c740b96ca42624daf78ab6ba1d11fb
   - enabled: 1
+    path: Assets/1.Scene/Loading.unity
+    guid: 965209fbecb65e14b8ee501ee1a178d7
+  - enabled: 1
     path: Assets/1.Scene/Map.unity
     guid: 56c41aedcfca0f843a2728caf308cf07
+  - enabled: 1
+    path: Assets/1.Scene/Level1Loading.unity
+    guid: a14485238d4fa264496f1e59a6d89a0c
   - enabled: 1
     path: Assets/1.Scene/SushiMap.unity
     guid: bf2d2bf887369974fbd086a827ca5f6a

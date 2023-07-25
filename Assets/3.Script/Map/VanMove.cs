@@ -15,11 +15,11 @@ public class VanMove : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         mapProduce = FindObjectOfType<MapProduce>();
-        if (gameManager.gameCheck)
-        {
-            transform.position 
-            = new Vector3(gameManager.savePos.position.x, gameManager.savePos.position.y, gameManager.savePos.position.z);
-        }
+        //if (gameManager.gameCheck)
+        //{
+        //    transform.position 
+        //    = new Vector3(gameManager.savePos.position.x, gameManager.savePos.position.y, gameManager.savePos.position.z);
+        //}
     }
 
     void Update()

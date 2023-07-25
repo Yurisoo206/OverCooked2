@@ -7,6 +7,6 @@ public class SceneChangeMap : MonoBehaviour
 {
     public void ScenceChange()
     {
-        SceneManager.LoadScene("Map");
+        SceneManager.LoadScene("Loading");
     }
 }
