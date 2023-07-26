@@ -17,11 +17,21 @@ public class GameControll : MonoBehaviour
 
     public bool gameOver= false;
 
+    public AudioSource audioSource;
+    public AudioSource bgmSource;
 
+    public AudioClip startClip;
+    public AudioClip gameoverAudio;
+    public AudioClip bgmAudio;
+    
 
     void Start()
     {
         timer = FindObjectOfType<Timer>();
+        audioSource = GetComponent<AudioSource>();
+        bgmSource = GetComponent<AudioSource>();
+
+        audioSource.Play();
     }
 
     void Update()
@@ -55,14 +65,23 @@ public class GameControll : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         startUI.SetActive(false);
+        
         yield return new WaitForSeconds(1f);
+
+        bgmSource.clip = bgmAudio;
+        bgmSource.Play();
+        
         isStart = true;
     }
 
     IEnumerator GameOver_Co()
     {
+        bgmSource.clip = bgmAudio;
+        bgmSource.Stop();
+        audioSource.clip = gameoverAudio;
+        audioSource.Play();
         yield return new WaitForSeconds(2f);
-
+        
         resultUI.SetActive(true);
     }
 }

@@ -17,10 +17,15 @@ public class Sushi : MonoBehaviour
     private int preChildcount;
     private bool check = false;
 
+    public AudioSource audioSource;
+    public AudioClip pickUpAudio;
+    public AudioClip putDownAudio;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerControll>();
         workTopCheck = GetComponent<GameObject>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -31,7 +36,8 @@ public class Sushi : MonoBehaviour
         }
         else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isCooking && !isplate)
         {
-            Debug.Log("¿œ¥‹ true");
+            audioSource.clip = putDownAudio;
+            audioSource.Play();
             isfall = true;
             gameObject.transform.SetParent(null);
             gameObject.AddComponent<Rigidbody>();
@@ -50,6 +56,9 @@ public class Sushi : MonoBehaviour
             preChildcount = childCount;
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
+                audioSource.clip = putDownAudio;
+                audioSource.Play();
+
                 check = true;
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
@@ -66,6 +75,9 @@ public class Sushi : MonoBehaviour
             isfallCheck = true;
 
             Destroy(GetComponent<Rigidbody>());
+
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
 
             if (gameObject.transform.parent != null)
             {
@@ -89,6 +101,9 @@ public class Sushi : MonoBehaviour
 
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
         {
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
+
             isfall = false;
             Destroy(GetComponent<Rigidbody>());
             check = false;
@@ -99,6 +114,9 @@ public class Sushi : MonoBehaviour
         if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space) &&
             player.isWorkTop2.name == other.gameObject.transform.GetComponentsInParent<Transform>()[1].name)
         {
+            audioSource.clip = putDownAudio;
+            audioSource.Play();
+
             isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
@@ -126,6 +144,9 @@ public class Sushi : MonoBehaviour
             Debug.Log(preChildcount);
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
+                audioSource.clip = putDownAudio;
+                audioSource.Play();
+
                 check = true;
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
@@ -141,6 +162,9 @@ public class Sushi : MonoBehaviour
             isfallCheck = true;
 
             Destroy(GetComponent<Rigidbody>());
+
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
 
             if (gameObject.transform.parent != null)
             {
@@ -164,6 +188,9 @@ public class Sushi : MonoBehaviour
 
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
         {
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
+
             isfall = false;
             Destroy(GetComponent<Rigidbody>());
             check = false;
@@ -175,6 +202,9 @@ public class Sushi : MonoBehaviour
         if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space) &&
             player.isWorkTop2.name == other.gameObject.transform.GetComponentsInParent<Transform>()[1].name)
         {
+            audioSource.clip = putDownAudio;
+            audioSource.Play();
+
             isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);

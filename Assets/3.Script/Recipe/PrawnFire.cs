@@ -19,12 +19,17 @@ public class PrawnFire : MonoBehaviour
     private int preChildcount;
     private bool check = false;
 
+    public AudioSource audioSource;
+    public AudioClip pickUpAudio;
+    public AudioClip putDownAudio;
+
     private void Start()
     {
         UI = Instantiate(UI_Prefad, transform.position, Quaternion.identity, transform);
         UI.transform.rotation = transform.rotation.normalized;
         player = FindObjectOfType<PlayerControll>();
         workTopCheck = GetComponent<GameObject>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -35,6 +40,9 @@ public class PrawnFire : MonoBehaviour
         }
         else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isCooking && !isplate)
         {
+            audioSource.clip = putDownAudio;
+            audioSource.Play();
+
             isfall = true;
             gameObject.transform.SetParent(null);
             gameObject.AddComponent<Rigidbody>();
@@ -53,6 +61,8 @@ public class PrawnFire : MonoBehaviour
             preChildcount = childCount;
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
+                audioSource.clip = putDownAudio;
+                audioSource.Play();
                 check = true;
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
@@ -67,6 +77,9 @@ public class PrawnFire : MonoBehaviour
             isfallCheck = true;
 
             Destroy(GetComponent<Rigidbody>());
+
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
 
             if (gameObject.transform.parent != null)
             {
@@ -89,6 +102,9 @@ public class PrawnFire : MonoBehaviour
         }
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
         {
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
+
             isfall = false;
             Destroy(GetComponent<Rigidbody>());
             check = false;
@@ -99,6 +115,9 @@ public class PrawnFire : MonoBehaviour
         if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space) &&
             player.isWorkTop2.name == other.gameObject.transform.GetComponentsInParent<Transform>()[1].name)
         {
+            audioSource.clip = putDownAudio;
+            audioSource.Play();
+
             isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
@@ -126,7 +145,8 @@ public class PrawnFire : MonoBehaviour
             preChildcount = childCount;
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
-
+                audioSource.clip = putDownAudio;
+                audioSource.Play();
                 check = true;
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
@@ -139,6 +159,9 @@ public class PrawnFire : MonoBehaviour
         {
             isfall = false;
             isfallCheck = true;
+
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
 
             if (gameObject.transform.parent != null)
             {
@@ -158,6 +181,9 @@ public class PrawnFire : MonoBehaviour
 
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && !player.ishand && !isplate && !player.isCollision && isfall)
         {
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
+
             isfall = false;
             Destroy(GetComponent<Rigidbody>());
             check = false;
@@ -168,6 +194,9 @@ public class PrawnFire : MonoBehaviour
         if (other.CompareTag("Plate") && !isplate && Input.GetKeyDown(KeyCode.Space) &&
             player.isWorkTop2.name == other.gameObject.transform.GetComponentsInParent<Transform>()[1].name)
         {
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
+
             isplate = true;
             gameObject.transform.SetParent(null);
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);

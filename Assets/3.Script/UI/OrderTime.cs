@@ -19,10 +19,11 @@ public class OrderTime : MonoBehaviour
 
     private int num = 0;
 
-
+    public AudioSource audioSource;
+    public AudioClip removeAudio;
     private void Start()
     {
-       
+        audioSource = GetComponent<AudioSource>();
         timerDuration = 10;
 
         dishCoinUI = FindObjectOfType<DishCoinUI>();
@@ -79,6 +80,9 @@ public class OrderTime : MonoBehaviour
                 orderlist.completeDish = 1;
                 orderlist.ordersheetCheck = true;
             }
+
+            audioSource.clip = removeAudio;
+            audioSource.Play();
         }
 
         yield break;

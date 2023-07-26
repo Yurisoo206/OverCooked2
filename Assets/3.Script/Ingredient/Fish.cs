@@ -24,11 +24,20 @@ public class Fish : MonoBehaviour
     private int preChildcount;
     private bool check = false;
 
+    public AudioSource audioSource;
+    public AudioClip pickUpAudio;
+    public AudioClip putDownAudio;
+
+    public AudioClip cookOnAudio;
+
+
+
     private void Start()
     {
         player = FindObjectOfType<PlayerControll>();
         workTopCheck = GetComponent<GameObject>();
         rd = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -39,6 +48,8 @@ public class Fish : MonoBehaviour
         }
         else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isCooking)
         {
+            audioSource.clip = putDownAudio;
+            audioSource.Play();
             Debug.Log("일단 true");
             isfall = true;
             gameObject.transform.SetParent(null);
@@ -62,6 +73,9 @@ public class Fish : MonoBehaviour
             {
                 check = true;
 
+                audioSource.clip = putDownAudio;
+                audioSource.Play();
+
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
                 transform.position = player.isWorkTop2.gameObject.GetComponentsInParent<Transform>()[2].position;
@@ -76,7 +90,8 @@ public class Fish : MonoBehaviour
             isfallCheck = true;
 
             Destroy(GetComponent<Rigidbody>());
-
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
             if (gameObject.transform.parent != null)
             {
                 if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall && isCook)
@@ -111,6 +126,9 @@ public class Fish : MonoBehaviour
             preChildcount = childCount;
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
+                audioSource.clip = putDownAudio;
+                audioSource.Play();
+
                 check = true;
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
@@ -126,6 +144,9 @@ public class Fish : MonoBehaviour
             isfallCheck = true;
 
             Destroy(GetComponent<Rigidbody>());
+
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
 
             if (gameObject.transform.parent != null)
             {
@@ -160,6 +181,8 @@ public class Fish : MonoBehaviour
         {
             if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name )
             {
+                audioSource.clip = cookOnAudio;
+                audioSource.loop = true;
                 //Debug.Log("파티클 실행할 예정");
                 gameObject.transform.GetChild(1).gameObject.SetActive(true);
                 isCook = true;
@@ -178,6 +201,8 @@ public class Fish : MonoBehaviour
 
         if (other.CompareTag("Player") && !player.isCook)
         {
+            audioSource.clip = cookOnAudio;
+            audioSource.loop = false;
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
             //Debug.Log("파티클 끌 예정");
         }

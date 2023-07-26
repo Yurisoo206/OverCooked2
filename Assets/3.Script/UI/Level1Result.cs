@@ -21,10 +21,7 @@ public class Level1Result : MonoBehaviour
     void Start()
     {
         StartCoroutine(Star_co());
-
-
     }
-
 
     private void Update()
     {

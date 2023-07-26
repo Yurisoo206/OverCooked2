@@ -18,13 +18,14 @@ public class Score : MonoBehaviour
 
     public Text text_score;
 
+    
 
     void Start()
     {
         gameover = FindObjectOfType<GameControll>();
-        //gameManager = FindObjectOfType<GameManager>();
         orderlist = FindObjectOfType<Orderlist>();
         ani = GetComponent<Animator>();
+        
     }
 
     void Update()

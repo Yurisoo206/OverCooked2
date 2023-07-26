@@ -20,10 +20,18 @@ public class Prawn : MonoBehaviour
     private int preChildcount;
     private bool check = false;
 
+
+    public AudioSource audioSource;
+    public AudioClip pickUpAudio;
+    public AudioClip putDownAudio;
+
+    public AudioClip cookOnAudio;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerControll>();
         workTopCheck = GetComponent<GameObject>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -34,6 +42,8 @@ public class Prawn : MonoBehaviour
         }
         else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isCooking)
         {
+            audioSource.clip = putDownAudio;
+            audioSource.Play();
             isfall = true;
             gameObject.transform.SetParent(null);
             gameObject.AddComponent<Rigidbody>();
@@ -50,8 +60,12 @@ public class Prawn : MonoBehaviour
             int childCount = parentTransform.childCount;
 
             preChildcount = childCount;
+
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
+                audioSource.clip = putDownAudio;
+                audioSource.Play();
+
                 check = true;
 
                 gameObject.transform.SetParent(null);
@@ -68,6 +82,9 @@ public class Prawn : MonoBehaviour
             isfallCheck = true;
 
             Destroy(GetComponent<Rigidbody>());
+
+            Destroy(GetComponent<Rigidbody>());
+            audioSource.clip = pickUpAudio;
 
             if (gameObject.transform.parent != null)
             {
@@ -102,6 +119,8 @@ public class Prawn : MonoBehaviour
             preChildcount = childCount;
             if (preChildcount < 1 && other.gameObject == player.isWorkTop2)
             {
+                audioSource.clip = putDownAudio;
+                audioSource.Play();
                 check = true;
                 gameObject.transform.SetParent(null);
                 transform.SetParent(player.isWorkTop2.gameObject.transform);
@@ -117,6 +136,10 @@ public class Prawn : MonoBehaviour
             isfallCheck = true;
 
             Destroy(GetComponent<Rigidbody>());
+
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
+
 
             if (gameObject.transform.parent != null)
             {
@@ -151,6 +174,8 @@ public class Prawn : MonoBehaviour
         {
             if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name)
             {
+                audioSource.clip = cookOnAudio;
+                audioSource.loop = true;
                 //Debug.Log("파티클 실행할 예정");
                 gameObject.transform.GetChild(1).gameObject.SetActive(true);
                 isCook = true;
@@ -169,6 +194,8 @@ public class Prawn : MonoBehaviour
 
         if (other.CompareTag("Player") && !player.isCook)
         {
+            audioSource.clip = cookOnAudio;
+            audioSource.loop = false;
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
             //Debug.Log("파티클 끌 예정");
         }

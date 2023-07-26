@@ -21,6 +21,8 @@ public class CompleteDish : MonoBehaviour
     public bool check = false;//주문 들어가게
     public bool isCheckR = false;//인식 리지브바디 키지 않기 위해
 
+    public AudioSource audioSource;
+    public AudioClip rightAudio;
 
     void Start()
     {
@@ -29,6 +31,8 @@ public class CompleteDish : MonoBehaviour
         orderlist = FindObjectOfType<Orderlist>();
         respawnPlate = FindObjectOfType<RespawnPlate>();
         score = FindObjectOfType<Score>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Check()
@@ -49,28 +53,30 @@ public class CompleteDish : MonoBehaviour
                 orderlist.completeDish = 2;
                 check = true;
             }
-            
-            
+
         }
 
         else if (dish.tag == "SushiCook")
         {
-            //Debug.Log("SushiCook" + dish.tag);
             orderlist.completeDish = 1;
             check = true;
+            
         }
 
         else if (dish.tag == "PrawnCook")
         {
-            //Debug.Log("PrawnCook" + dish.tag);
             orderlist.completeDish = 2;
             check = true;
+            
         }
 
         else
         {
             score.tip = 0;
         }
+
+        audioSource.clip = rightAudio;
+        audioSource.Play();
 
         Debug.DrawRay(transform.position, transform.up * 6f, Color.black);
         player.isPlate = false;

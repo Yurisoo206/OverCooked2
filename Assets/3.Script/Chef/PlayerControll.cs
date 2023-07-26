@@ -119,7 +119,6 @@ public class PlayerControll : MonoBehaviour
         if (other.CompareTag("WorkTop"))
         {
             isCollision = true;
-            Debug.Log("인지중");
 
         }
         if (other.CompareTag("ChppingBoard") && isCook)//다지기
@@ -142,7 +141,6 @@ public class PlayerControll : MonoBehaviour
         if (other.CompareTag("WorkTop"))
         {
             isCollision = true;
-            Debug.Log("인지중");
         }
 
         if (other.CompareTag("ChppingBoard") && isCook)//다지기
@@ -170,7 +168,6 @@ public class PlayerControll : MonoBehaviour
         if (other.CompareTag("WorkTop"))
         {
             isCollision = false;
-            Debug.Log("인지 안 함");
         }
 
         if (other.CompareTag("ChppingBoard") && !isCook)

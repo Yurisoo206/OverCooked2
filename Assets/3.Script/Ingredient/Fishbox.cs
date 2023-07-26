@@ -13,11 +13,16 @@ public class Fishbox : MonoBehaviour
     public GameObject fish;
     private Animator ani;
 
+    public AudioSource audioSource;
+    public AudioClip pickUpAudio;
+
+
     private void Start()
     {
         playerInput = FindObjectOfType<PlayerInputManager>();
         player = FindObjectOfType<PlayerControll>();
         ani = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,6 +30,8 @@ public class Fishbox : MonoBehaviour
         if (other.CompareTag("Player") && playerInput.isInteraction_space && !player.ishand &&
             player.isWorkTop2.name == gameObject.transform.GetComponentsInChildren<Transform>()[7].name)
         {
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
             player.ishand = true;
             ani.SetTrigger("Open");
             playerPos = other.GetComponentsInChildren<Transform>()[1].transform;
@@ -38,6 +45,8 @@ public class Fishbox : MonoBehaviour
         if (other.CompareTag("Player") && playerInput.isInteraction_space && !player.ishand &&
             player.isWorkTop2.name == gameObject.transform.GetComponentsInChildren<Transform>()[7].name)
         {
+            audioSource.clip = pickUpAudio;
+            audioSource.Play();
             player.ishand = true;
             ani.SetTrigger("Open");
             playerPos = other.GetComponentsInChildren<Transform>()[1].transform;

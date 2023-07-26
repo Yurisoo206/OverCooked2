@@ -27,7 +27,6 @@ public class Menu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         audioClip = GetComponent<AudioClip>();
     }
 
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         buttonImage.sprite = hoverSprite; // 버튼 이미지 변경
