@@ -10,9 +10,6 @@ public class Worktop : MonoBehaviour
 
     public MeshRenderer mesh;
 
-    private int preChildcount;
-    private bool check = false;
-
     private void Start()
     {
         mesh = GetComponent<MeshRenderer>();

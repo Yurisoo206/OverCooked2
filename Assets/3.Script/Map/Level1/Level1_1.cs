@@ -8,13 +8,14 @@ public class Level1_1 : MonoBehaviour
 {
     public Score score;
     private bool isMap = false;//깃발과 닿아서 맵이 켜진 경우
-    private int ischeck = 0;//이거 게임 할 때마다 별 추가를 막기 위해
     
     public GameObject mapImage;
 
     public GameObject star1;
     public GameObject star2;
     public GameObject star3;
+
+    public GameObject savePos;
 
     public Sprite starSprite;
 

@@ -10,9 +10,7 @@ public class GameManager : MonoBehaviour
 
     public bool gameCheck = false;
     public bool level1_Check = false;
-
-
-    public Transform savePos ;
+    public bool level2_Check = false;
 
     public static GameManager Instance = null;
 

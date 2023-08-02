@@ -14,7 +14,7 @@ public class Orderlist : MonoBehaviour
     public GameObject order2;
     public GameObject order3;
     public GameObject order4;
-    public GameObject order5;//Transform으로 바꿔라
+    public GameObject order5;
 
     
     public GameObject OrderSheet;
@@ -29,7 +29,7 @@ public class Orderlist : MonoBehaviour
     public GameObject sheet1_prefed;
     public GameObject sheet2_prefed;
 
-    List<GameObject> orderList = new List<GameObject>();//그 생성
+    List<GameObject> orderList = new List<GameObject>();//생성
     public GameObject[] setList;
 
     private int num = 0;
@@ -42,7 +42,7 @@ public class Orderlist : MonoBehaviour
     private float time = 0f;
     private bool timecheck = true;
 
-    //일단 sheet 생성시 받아갈 위치 
+    //sheet 생성시 받아갈 위치 
     public GameObject sheetPos;
     
 
@@ -78,10 +78,6 @@ public class Orderlist : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                RandomOrder();
-            }
             if (dish.check || ordersheetCheck)
             {
 
@@ -139,7 +135,7 @@ public class Orderlist : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < orderList.Count; i++)
+        for (int i = 0; i < orderList.Count+1; i++)
         {
             if (order == orderList[0])
             {

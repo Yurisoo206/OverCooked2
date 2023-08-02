@@ -154,6 +154,8 @@ public class Prawn : MonoBehaviour
                 isCooking = false;
                 check = false;
                 transform.position = other.GetComponentsInChildren<Transform>()[1].transform.position;
+                Debug.Log(other.GetComponentsInChildren<Transform>()[1].transform.position);
+                transform.rotation = other.GetComponentsInChildren<Transform>()[1].transform.rotation;
                 transform.SetParent(other.gameObject.transform);
             }
 
@@ -198,6 +200,10 @@ public class Prawn : MonoBehaviour
             audioSource.loop = false;
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
             //Debug.Log("파티클 끌 예정");
+        }
+        if (other.CompareTag("ChppingBoard"))
+        {
+            isCooking = false;
         }
     }
 }

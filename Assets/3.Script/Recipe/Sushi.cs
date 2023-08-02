@@ -84,7 +84,6 @@ public class Sushi : MonoBehaviour
                 if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
                 {
                     isCooking = false;
-                    Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
                     gameObject.transform.SetParent(null);
 
                 }
@@ -122,7 +121,6 @@ public class Sushi : MonoBehaviour
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
-            Debug.Log(gameObject.GetComponentsInParent<Transform>()[2].name);
             plateTag = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
             plateTag.layer = 9;
             plateTag.tag = "SushiCook";
@@ -171,7 +169,6 @@ public class Sushi : MonoBehaviour
                 if (player.isWorkTop2.name == gameObject.GetComponentsInParent<Transform>()[1].name && !isfall)
                 {
                     isCooking = false;
-                    Debug.Log(gameObject.GetComponentsInParent<Transform>()[1].name);
                     gameObject.transform.SetParent(null);
 
                 }
@@ -210,7 +207,6 @@ public class Sushi : MonoBehaviour
             transform.SetParent(other.gameObject.GetComponentsInChildren<Transform>()[1].transform);
             transform.position = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.position;
             transform.rotation = other.gameObject.GetComponentsInChildren<Transform>()[1].transform.rotation;
-            Debug.Log(gameObject.GetComponentsInParent<Transform>()[2].name);
             plateTag = gameObject.GetComponentsInParent<Transform>()[2].gameObject;
             plateTag.layer = 9;
             plateTag.tag = "SushiCook";

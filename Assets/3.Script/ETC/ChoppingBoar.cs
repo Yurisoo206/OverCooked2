@@ -11,7 +11,6 @@ public class ChoppingBoar : MonoBehaviour
     GameObject knife = null;
     GameObject ui = null;
     GameObject workTop = null;
-    GameObject test = null;
 
     public LayerMask layerMask;
 

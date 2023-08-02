@@ -15,10 +15,12 @@ public class Score : MonoBehaviour
     public int tip = 0;
     public int tipCoin = 0;
 
+    public GameObject tip2;
+    public GameObject tip3;
+
 
     public Text text_score;
-
-    
+    public Text text_tip;
 
     void Start()
     {
@@ -31,12 +33,30 @@ public class Score : MonoBehaviour
     void Update()
     {
         text_score.text = score.ToString();
+        text_tip.text = "X" + tip.ToString();
+
+        if (tip > 0)
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+            if (tip == 2)
+            {
+                tip2.SetActive(true);
+            }
+            if (tip == 3)
+            {
+                tip3.SetActive(true);
+            }
+        }
         if (tip >= 4)
         {
+            
             tip = 4;
         }
         if (tip <= 0)
         {
+            tip2.SetActive(false);
+            tip3.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
             tip = 0;
         }
         if (score2 != score )

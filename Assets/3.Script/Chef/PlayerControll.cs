@@ -94,6 +94,7 @@ public class PlayerControll : MonoBehaviour
     {
         isRun = false;
 
+        
         if ((playerInput.inputX != 0 || playerInput.inputZ != 0 ))
         {
             isRun = true;

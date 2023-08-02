@@ -14,8 +14,7 @@ public class Fish : MonoBehaviour
     public bool isplate = false;
     public bool isCooking = false;//workTop 올리는 거
     public bool isCook = false;//다지는 중인거
-    //private bool isCollision = false;//아무것도 접촉 안 할 때 알 기 위해
-    public bool isfall = false;//걍 바닥에 두는 용
+    public bool isfall = false;//바닥에 두는 용
     public bool isfallCheck = false;
  
 
@@ -50,7 +49,6 @@ public class Fish : MonoBehaviour
         {
             audioSource.clip = putDownAudio;
             audioSource.Play();
-            Debug.Log("일단 true");
             isfall = true;
             gameObject.transform.SetParent(null);
             gameObject.AddComponent<Rigidbody>();
@@ -205,6 +203,10 @@ public class Fish : MonoBehaviour
             audioSource.loop = false;
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
             //Debug.Log("파티클 끌 예정");
+        }
+        if (other.CompareTag("ChppingBoard"))
+        {
+            isCooking = false;
         }
     }
 

@@ -215,6 +215,8 @@ MonoBehaviour:
   - {fileID: 6870968699698115909}
   audioSource: {fileID: 1649266062448925989}
   removeAudio: {fileID: 8300000, guid: f2673fa3f215d6f4796af26db6136b13, type: 3}
+  slider2_fill: {fileID: 9184649180495011605}
+  slider3_fill: {fileID: 2617999240559665391}
 --- !u!82 &1649266062448925989
 AudioSource:
   m_ObjectHideFlags: 0

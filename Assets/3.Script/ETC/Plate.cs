@@ -36,6 +36,7 @@ public class Plate : MonoBehaviour
         if (isfallCheck)
         {
             isfallCheck = false;
+            isdishCheck = false; 
         }
         else if (gameObject.transform.root.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.isCollision && !isfall && !isfallCheck && !isdishCheck)
         {

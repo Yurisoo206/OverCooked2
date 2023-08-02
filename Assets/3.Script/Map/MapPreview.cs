@@ -13,7 +13,7 @@ public class MapPreview : MonoBehaviour
 
     private void LateUpdate()
     {
-        // UI를 항상 메인 카메라를 향하도록 회전시킵니다.
+        // UI를 항상 메인 카메라를 향하도록 회전
         transform.LookAt(transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
     }
 }

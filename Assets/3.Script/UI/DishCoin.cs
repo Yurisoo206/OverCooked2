@@ -19,7 +19,6 @@ public class DishCoin : MonoBehaviour
     void Start()
     {
         coin = score.tipCoin;
-        Debug.Log("거 팀 얼마나 받았나 함 봅시다" + coin);
         text_score.text = "+" + coin.ToString();
         Destroy(gameObject, 1f);
 

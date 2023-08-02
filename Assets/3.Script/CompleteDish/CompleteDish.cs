@@ -43,13 +43,11 @@ public class CompleteDish : MonoBehaviour
         {
             if (dish.tag == "SushiCook")
             {
-                Debug.Log("SushiCook" + dish.tag);
                 orderlist.completeDish = 1;
                 check = true;
             }
             else if (dish.tag == "PrawnCook")
             {
-                Debug.Log("PrawnCook" + dish.tag);
                 orderlist.completeDish = 2;
                 check = true;
             }

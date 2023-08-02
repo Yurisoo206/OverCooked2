@@ -10,7 +10,7 @@ public class OrderTime : MonoBehaviour
 
     public DishCoinUI dishCoinUI;
 
-    private float timerDuration = 15; // 각 타이머의 지속 시간
+    private float timerDuration = 20; // 각 타이머의 지속 시간
 
 
     public Slider[] slider = new Slider[3];
@@ -21,8 +21,19 @@ public class OrderTime : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip removeAudio;
+
+    public Image slider2_fill;
+    public Image slider3_fill;
+
+    Color _Red;
+    Color _Orange;
+
+
     private void Start()
     {
+        _Red = new Color(1, 0, 0, 1);
+        _Orange = new Color(1, 0.6f, 0, 1);
+
         audioSource = GetComponent<AudioSource>();
         timerDuration = 10;
 
@@ -33,6 +44,8 @@ public class OrderTime : MonoBehaviour
         {
             slider[i].maxValue = timerDuration;
             slider[i].value = timerDuration;
+
+            
         }
         
         currentTime = timerDuration;
@@ -44,11 +57,24 @@ public class OrderTime : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            
+            if (i == 1)
+            {
+                slider2_fill.color = _Orange;
+                slider3_fill.color = _Orange;
+            }
+
+            if (i == 2)
+            {
+                slider2_fill.color = _Red;
+                slider3_fill.color = _Red;
+            }
+
             while (true)
             {
                 currentTime -= Time.deltaTime;
                 slider[i].value = currentTime;
+
+                
 
                 if (currentTime <= 0)
                 {
@@ -69,20 +95,20 @@ public class OrderTime : MonoBehaviour
             //Debug.Log("타임오버로 사라집니다.");
             if (gameObject.transform.tag == "Prawn")
             {
-                //Debug.Log("일단 새우");
                 orderlist.completeDish = 2;
                 orderlist.ordersheetCheck = true;
+                audioSource.clip = removeAudio;
+                audioSource.Play();
             }
             else if (gameObject.transform.tag == "Sushi")
             {
-
-                //Debug.Log("일단 스시");
                 orderlist.completeDish = 1;
                 orderlist.ordersheetCheck = true;
+                audioSource.clip = removeAudio;
+                audioSource.Play();
             }
 
-            audioSource.clip = removeAudio;
-            audioSource.Play();
+            
         }
 
         yield break;
