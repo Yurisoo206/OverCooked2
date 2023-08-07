@@ -15,8 +15,6 @@ public class VanMove : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         mapProduce = FindObjectOfType<MapProduce>();
-
-        //transform.position = gameManager.transform.position;
     }
 
     void Update()

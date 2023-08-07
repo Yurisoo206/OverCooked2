@@ -10,7 +10,7 @@ public class PlayerControll : MonoBehaviour
 
     private Rigidbody player_R;
     private Animator ani;
-    public bool ischeck = false;//그 도마 같은거 접촉
+    public bool ischeck = false;//테이블 접촉
     public bool isPlate= false;//접시 접촉
     public bool getCook = false;
     public bool ishand = false;//손에 무언가 있는지 확인
@@ -27,7 +27,7 @@ public class PlayerControll : MonoBehaviour
 
     public LayerMask layerMask;
     
-    public GameObject cookWorkTop;//도마
+    public GameObject cookWorkTop;//테이블
     public GameObject choppingBoar;
 
     public Queue<GameObject> colqueue;

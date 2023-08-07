@@ -9,7 +9,6 @@ public class MapProduce : MonoBehaviour
 
     void Start()
     {
-
         ani = GetComponent<Animator>();
         if (!GameManager.Instance.level1_Check)
         {

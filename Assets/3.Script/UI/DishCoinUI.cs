@@ -15,7 +15,6 @@ public class DishCoinUI : MonoBehaviour
     {
         if (dishcoinActive)
         {
-            //Debug.Log("фа");
             dishCoin = Instantiate(dishCoin_prefed, dishCoinPos.position, dishCoinPos.rotation);
             dishCoin.transform.SetParent(gameObject.transform);
             dishcoinActive = false;

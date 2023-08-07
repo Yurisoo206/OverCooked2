@@ -6,12 +6,6 @@ public class Menusheet : MonoBehaviour
 {
     float time;
 
-
-    private void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (time < 0.4f)

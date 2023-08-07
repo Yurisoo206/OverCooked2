@@ -34,7 +34,6 @@ public class ExitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void ExitGame()
     {
-        Debug.Log("Á¾·á");
         Application.Quit();
     }
 }

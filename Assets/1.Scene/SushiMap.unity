@@ -55748,7 +55748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
-  fish_prefed: {fileID: 1757520106346782716, guid: 761834ce7e0988f4c9ed50e0bc149dd9, type: 3}
+  fish_prefed: {fileID: 1757520106346782716, guid: 79586b724d80f614f894deea599b5ecb, type: 3}
   fish: {fileID: 0}
   audioSource: {fileID: 4578159302584348285}
   pickUpAudio: {fileID: 8300000, guid: f66d6775916ccc947bc27f2283ec24f8, type: 3}
@@ -62375,7 +62375,6 @@ GameObject:
   m_Component:
   - component: {fileID: 838856241903052930}
   - component: {fileID: 5332874581450605603}
-  - component: {fileID: 5332874581450605602}
   m_Layer: 0
   m_Name: Bin 1
   m_TagString: Untagged
@@ -62383,25 +62382,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5332874581450605602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5332874581450605601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70fa4a7efc434c746bb6466acae9b5ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  layerMask1:
-    serializedVersion: 2
-    m_Bits: 128
-  layerMask2:
-    serializedVersion: 2
-    m_Bits: 2048
 --- !u!65 &5332874581450605603
 BoxCollider:
   m_ObjectHideFlags: 0

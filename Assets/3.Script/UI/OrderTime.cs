@@ -44,8 +44,6 @@ public class OrderTime : MonoBehaviour
         {
             slider[i].maxValue = timerDuration;
             slider[i].value = timerDuration;
-
-            
         }
         
         currentTime = timerDuration;
@@ -91,8 +89,6 @@ public class OrderTime : MonoBehaviour
         if (num > 2)
         {
             score.tip = 0;
-            //Debug.Log("코인" + score.score);
-            //Debug.Log("타임오버로 사라집니다.");
             if (gameObject.transform.tag == "Prawn")
             {
                 orderlist.completeDish = 2;
@@ -121,7 +117,6 @@ public class OrderTime : MonoBehaviour
             score.score += 50;
             score.tip++;
             dishCoinUI.dishcoinActive = true;
-            //Debug.Log("팁 확인" + dishCoinUI.dishcoinActive);
         }
         else if (num == 1)
         {
@@ -129,7 +124,6 @@ public class OrderTime : MonoBehaviour
             score.tip++;
             score.score += score.tipCoin;
             dishCoinUI.dishcoinActive = true;
-            //Debug.Log("팁 확인" + dishCoinUI.dishcoinActive);
         }
         else if (num == 2)
         {

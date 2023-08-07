@@ -13,8 +13,6 @@ public class DishCoin : MonoBehaviour
     private void Awake()
     {
         score = FindObjectOfType<Score>();
-
-        
     }
     void Start()
     {

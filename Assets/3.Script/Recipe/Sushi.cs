@@ -8,8 +8,8 @@ public class Sushi : MonoBehaviour
 
     public bool isplate = false;
     public bool isCooking = false;//workTop 올리는 거
-    public bool isfall = false;//걍 바닥에 두는 용
-    public bool isfallCheck = false;//
+    public bool isfall = false;
+    public bool isfallCheck = false;
 
     private GameObject workTopCheck;
     private GameObject plateTag;

@@ -238,7 +238,6 @@ public class Orderlist : MonoBehaviour
 
         if (numcheck > orderList.Count)
         {
-            Debug.Log("뭐야 왜 주문 안한거 줌? 별점 1점 드립니다.");
             score.tip = 0;
 
         }

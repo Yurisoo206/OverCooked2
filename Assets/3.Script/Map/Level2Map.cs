@@ -13,7 +13,6 @@ public class Level2Map : MonoBehaviour
         ani = GetComponent<Animator>();
         if (GameManager.Instance.level1_star != 0)
         {
-            Debug.Log("¸Ê2 ½ÇÇà");
             GameManager.Instance.level2_Check = true;
             Invoke("MapLevel_2", 1.5f);
             level2Flag.SetActive(true);
